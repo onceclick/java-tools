@@ -1,6 +1,5 @@
 package com.janosgyerik.tools.util;
 
-import com.janosgyerik.tools.util.IterTools;
 import org.junit.Test;
 
 import java.util.Arrays;
