@@ -19,7 +19,7 @@ public class IterTools {
     }
 
     public static <T> Set<List<T>> permutations(Collection<T> collection) {
-        Set<List<T>> result = new LinkedHashSet<>();
+        Set<List<T>> result = new HashSet<>();
 
         Queue<PermutationHelper<T>> queue = new LinkedList<>();
         queue.add(new PermutationHelper<>(new LinkedList<>(), new LinkedList<>(collection)));
