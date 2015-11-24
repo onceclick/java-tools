@@ -19,24 +19,30 @@ public class IterTools {
     }
 
     public static <T> Set<List<T>> permutations(Collection<T> collection) {
-        Set<List<T>> result = new HashSet<>();
+        if (collection.isEmpty()) {
+            return Collections.emptySet();
+        }
 
         Queue<PermutationHelper<T>> queue = new LinkedList<>();
-        queue.add(new PermutationHelper<>(new LinkedList<>(), new LinkedList<>(collection)));
+        queue.add(new PermutationHelper<>(Collections.emptyList(), new LinkedList<>(collection)));
 
-        while (!queue.isEmpty()) {
+        while (true) {
+            if (queue.peek().choices.isEmpty()) {
+                break;
+            }
             PermutationHelper<T> helper = queue.poll();
             for (T candidate : helper.choices) {
                 List<T> newList = new LinkedList<>(helper.list);
                 List<T> newChoices = new LinkedList<>(helper.choices);
                 newChoices.remove(candidate);
                 newList.add(candidate);
-                if (newList.size() == collection.size()) {
-                    result.add(newList);
-                } else {
-                    queue.add(new PermutationHelper<>(newList, newChoices));
-                }
+                queue.add(new PermutationHelper<>(newList, newChoices));
             }
+        }
+
+        Set<List<T>> result = new HashSet<>();
+        for (PermutationHelper<T> helper : queue) {
+            result.add(helper.list);
         }
         return result;
     }
