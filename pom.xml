@@ -6,6 +6,10 @@
     <version>1.0-SNAPSHOT</version>
     <packaging>pom</packaging>
 
+    <name>${project.artifactId}</name>
+    <description>Various Java tools</description>
+    <url>https://github.com/janosgyerik/java-tools</url>
+
     <modules>
         <module>tools</module>
     </modules>
