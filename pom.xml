@@ -37,7 +37,7 @@
             <!-- Required to enable the use of SSH in mvn deploy -->
             <extension>
                 <groupId>org.apache.maven.wagon</groupId>
-                <artifactId>wagon-ssh-external</artifactId>
+                <artifactId>wagon-ssh</artifactId>
                 <version>2.10</version>
             </extension>
         </extensions>
@@ -55,7 +55,7 @@
     <distributionManagement>
         <repository>
             <id>ssh-repository</id>
-            <url>scpexe://maven.janosgyerik.com/home/janoscom/webapps/maven.janosgyerik.com/</url>
+            <url>scp://maven.janosgyerik.com/home/janoscom/webapps/maven.janosgyerik.com/</url>
         </repository>
     </distributionManagement>
 </project>
