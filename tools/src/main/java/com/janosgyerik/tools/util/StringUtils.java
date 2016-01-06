@@ -72,7 +72,7 @@ public final class StringUtils {
     }
 
     private static boolean anyNull(String[] strings) {
-        return Stream.of(strings).allMatch(x -> x == null);
+        return Stream.of(strings).anyMatch(x -> x == null);
     }
 
     private static boolean containsDuplicates(String[] strings) {

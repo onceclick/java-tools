@@ -138,7 +138,7 @@ public class StringUtilsTest {
         thrown.expect(IllegalArgumentException.class);
         thrown.expectMessage(ERR_NULL_REPLACEMENT);
 
-        replace("", new String[]{"foo"}, new String[]{null});
+        replace("", new String[]{"foo", "bar"}, new String[]{"baz", null});
     }
 
     @Test
