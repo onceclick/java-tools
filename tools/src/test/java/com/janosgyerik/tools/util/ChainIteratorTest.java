@@ -1,6 +1,5 @@
 package com.janosgyerik.tools.util;
 
-import com.janosgyerik.tools.util.ChainIterator;
 import org.junit.Test;
 
 import java.util.Arrays;
