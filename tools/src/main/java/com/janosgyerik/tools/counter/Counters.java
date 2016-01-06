@@ -5,10 +5,10 @@ import com.janosgyerik.tools.counter.api.SortedCounter;
 
 import java.util.*;
 
-public class Counters {
+public final class Counters {
 
     private Counters() {
-        // utility class, forbidden constructor
+        throw new AssertionError("utility class, forbidden constructor");
     }
 
     private static class CounterImpl<T> implements Counter<T> {

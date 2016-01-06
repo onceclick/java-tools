@@ -6,7 +6,11 @@ import java.util.stream.Stream;
 
 import static java.util.stream.Collectors.joining;
 
-public class StringUtils {
+public final class StringUtils {
+
+    private StringUtils() {
+        throw new AssertionError("utility class, forbidden constructor");
+    }
 
     public static final String ERR_NULL_PARAM = "none of the parameters should be null";
     public static final String ERR_SEARCHSTRINGS_REPLACEMENTS_LENGTH_MISMATCH =

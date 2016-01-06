@@ -5,10 +5,10 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
-public class ListUtils {
+public final class ListUtils {
 
     private ListUtils() {
-        // utility class, forbidden constructor
+        throw new AssertionError("utility class, forbidden constructor");
     }
 
     public static <T> List<List<T>> partition(List<T> orig, int size) {

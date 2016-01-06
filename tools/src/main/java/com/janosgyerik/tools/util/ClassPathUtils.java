@@ -2,10 +2,10 @@ package com.janosgyerik.tools.util;
 
 import java.net.URL;
 
-public class ClassPathUtils {
+public final class ClassPathUtils {
 
     private ClassPathUtils() {
-        // utility class, forbidden constructor
+        throw new AssertionError("utility class, forbidden constructor");
     }
 
     public URL getResourceUrl(String resourceName) {

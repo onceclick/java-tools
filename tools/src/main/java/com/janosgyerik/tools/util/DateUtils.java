@@ -5,7 +5,11 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
-public class DateUtils {
+public final class DateUtils {
+
+    private DateUtils() {
+        throw new AssertionError("utility class, forbidden constructor");
+    }
 
     /**
      * Create a (truncated) date object from year, month, day.

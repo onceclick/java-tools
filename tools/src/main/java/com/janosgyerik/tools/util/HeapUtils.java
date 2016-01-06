@@ -1,9 +1,9 @@
 package com.janosgyerik.tools.util;
 
-public class HeapUtils {
+public final class HeapUtils {
 
     private HeapUtils() {
-        // utility class, forbidden constructor
+        throw new AssertionError("utility class, forbidden constructor");
     }
 
     public static boolean isHeap(int[] arr) {

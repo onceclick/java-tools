@@ -6,10 +6,10 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.regex.Pattern;
 
-public class FileFilters {
+public final class FileFilters {
 
 	private FileFilters() {
-		// utility class, forbidden constructor
+		throw new AssertionError("utility class, forbidden constructor");
 	}
 
 	public static FileFilter stringMatching(final String pattern) {

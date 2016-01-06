@@ -9,10 +9,10 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
-public class FileFinders {
+public final class FileFinders {
 
 	private FileFinders() {
-		// utility class, forbidden constructor
+		throw new AssertionError("utility class, forbidden constructor");
 	}
 
 	private static class FileFinderImpl implements FileFinder {

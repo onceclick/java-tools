@@ -2,10 +2,10 @@ package com.janosgyerik.tools.util;
 
 import java.util.*;
 
-public class IterTools {
+public final class IterTools {
 
     private IterTools() {
-        // utility class, forbidden constructor
+        throw new AssertionError("utility class, forbidden constructor");
     }
 
     private static class PermutationHelper<T> {
