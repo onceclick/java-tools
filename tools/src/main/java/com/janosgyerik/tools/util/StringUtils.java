@@ -14,12 +14,12 @@ public final class StringUtils {
         throw new AssertionError("utility class, forbidden constructor");
     }
 
-    public static final String ERR_NULL_PARAM = "none of the parameters should be null";
-    public static final String ERR_SEARCHSTRINGS_REPLACEMENTS_LENGTH_MISMATCH =
+    protected static final String ERR_NULL_PARAM = "none of the parameters should be null";
+    protected static final String ERR_SEARCHSTRINGS_REPLACEMENTS_LENGTH_MISMATCH =
             "there must be the same number of search strings and replacements";
-    public static final String ERR_NULL_OR_EMPTY_SEARCHSTRING = "there must be no null element or empty search string";
-    public static final String ERR_NULL_REPLACEMENT = "there must be no null element in replacements";
-    public static final String ERR_DUPLICATE_SEARCHSTRINGS = "search strings must be distinct";
+    protected static final String ERR_NULL_OR_EMPTY_SEARCHSTRING = "there must be no null element or empty search string";
+    protected static final String ERR_NULL_REPLACEMENT = "there must be no null element in replacements";
+    protected static final String ERR_DUPLICATE_SEARCHSTRINGS = "search strings must be distinct";
 
     /**
      * Replace multiple search strings simultaneously
