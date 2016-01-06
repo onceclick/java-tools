@@ -2,12 +2,13 @@ package com.janosgyerik.tools.util;
 
 import java.util.Iterator;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Queue;
 
 public class ChainIterator<E> implements Iterator<E> {
     private final Queue<Iterator<E>> iterators = new LinkedList<>();
 
-    public ChainIterator(Iterator<E>... iterators) {
+    public ChainIterator(List<Iterator<E>> iterators) {
         for (Iterator<E> iterator : iterators) {
             if (iterator.hasNext()) {
                 this.iterators.add(iterator);

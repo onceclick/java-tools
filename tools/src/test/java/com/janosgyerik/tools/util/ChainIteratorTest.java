@@ -12,7 +12,7 @@ public class ChainIteratorTest {
     @Test
     public void test_single_iterator() {
         List<Integer> list = Arrays.asList(1, 2, 3);
-        ChainIterator<Integer> chainIterator = new ChainIterator<>(list.iterator());
+        ChainIterator<Integer> chainIterator = new ChainIterator<>(Collections.singletonList(list.iterator()));
         for (Integer item : list) {
             assertTrue(chainIterator.hasNext());
             assertEquals(item, chainIterator.next());
@@ -25,10 +25,10 @@ public class ChainIteratorTest {
         List<Integer> list1 = Arrays.asList(1, 2, 3);
         List<Integer> list2 = Arrays.asList(4, 5);
 
-        ChainIterator<Integer> chainIterator = new ChainIterator<>(
+        ChainIterator<Integer> chainIterator = new ChainIterator<>(Arrays.asList(
                 list1.iterator(),
                 list2.iterator()
-        );
+        ));
 
         for (Integer item : list1) {
             assertTrue(chainIterator.hasNext());
@@ -46,11 +46,11 @@ public class ChainIteratorTest {
         List<Integer> list1 = Arrays.asList(1, 2, 3);
         List<Integer> list2 = Arrays.asList(4, 5);
 
-        ChainIterator<Integer> chainIterator = new ChainIterator<>(
+        ChainIterator<Integer> chainIterator = new ChainIterator<>(Arrays.asList(
                 list1.iterator(),
                 Collections.<Integer>emptyList().iterator(),
                 list2.iterator()
-        );
+        ));
 
         for (Integer item : list1) {
             assertTrue(chainIterator.hasNext());
@@ -68,13 +68,13 @@ public class ChainIteratorTest {
         List<Integer> list1 = Arrays.asList(1, 2, 3);
         List<Integer> list2 = Arrays.asList(4, 5);
 
-        ChainIterator<Integer> chainIterator = new ChainIterator<>(
+        ChainIterator<Integer> chainIterator = new ChainIterator<>(Arrays.asList(
                 Collections.<Integer>emptyList().iterator(),
                 list1.iterator(),
                 Collections.<Integer>emptyList().iterator(),
                 Collections.<Integer>emptyList().iterator(),
                 list2.iterator()
-        );
+        ));
 
         for (Integer item : list1) {
             assertTrue(chainIterator.hasNext());
@@ -89,11 +89,11 @@ public class ChainIteratorTest {
 
     @Test
     public void test_only_empty_iterators() {
-        ChainIterator<Integer> chainIterator = new ChainIterator<>(
+        ChainIterator<Integer> chainIterator = new ChainIterator<>(Arrays.asList(
                 Collections.<Integer>emptyList().iterator(),
                 Collections.<Integer>emptyList().iterator(),
                 Collections.<Integer>emptyList().iterator()
-        );
+        ));
         assertFalse(chainIterator.hasNext());
     }
 }
