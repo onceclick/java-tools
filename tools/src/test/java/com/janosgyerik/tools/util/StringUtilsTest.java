@@ -122,7 +122,7 @@ public class StringUtilsTest {
         thrown.expect(IllegalArgumentException.class);
         thrown.expectMessage(ERR_NULL_OR_EMPTY_SEARCHSTRING);
 
-        replace("", new String[]{null}, new String[]{"bar"});
+        replace("", new String[]{"foo", null}, new String[]{"bar", "baz"});
     }
 
     @Test
@@ -130,7 +130,7 @@ public class StringUtilsTest {
         thrown.expect(IllegalArgumentException.class);
         thrown.expectMessage(ERR_NULL_OR_EMPTY_SEARCHSTRING);
 
-        replace("", new String[]{""}, new String[]{"bar"});
+        replace("", new String[]{"foo", ""}, new String[]{"bar", "baz"});
     }
 
     @Test

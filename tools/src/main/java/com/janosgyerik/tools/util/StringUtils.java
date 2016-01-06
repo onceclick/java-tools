@@ -68,7 +68,7 @@ public final class StringUtils {
     }
 
     private static boolean anyNullOrEmpty(String[] strings) {
-        return Stream.of(strings).allMatch(x -> x == null || x.isEmpty());
+        return Stream.of(strings).anyMatch(x -> x == null || x.isEmpty());
     }
 
     private static boolean anyNull(String[] strings) {
