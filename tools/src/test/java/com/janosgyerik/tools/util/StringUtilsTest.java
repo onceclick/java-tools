@@ -149,4 +149,9 @@ public class StringUtilsTest {
         String before = "foo";
         replace("", new String[]{before, before}, new String[]{"bar", "baz"});
     }
+
+    @Test
+    public void test_replace_special_characters() {
+        assertEquals("barbaz", replace("f.*bar", new String[]{"f.*", "bar"}, new String[]{"bar", "baz"}));
+    }
 }

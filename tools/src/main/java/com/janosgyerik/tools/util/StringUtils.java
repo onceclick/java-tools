@@ -31,7 +31,7 @@ public final class StringUtils {
         validateParams(text, searchStrings, replacements);
 
         StringBuffer buffer = new StringBuffer();
-        Pattern pattern = Pattern.compile(Stream.of(searchStrings).collect(joining("|")));
+        Pattern pattern = buildPattern(searchStrings);
         Matcher matcher = pattern.matcher(text);
         while (matcher.find()) {
             String match = matcher.group();
@@ -44,6 +44,10 @@ public final class StringUtils {
         }
         matcher.appendTail(buffer);
         return buffer.toString();
+    }
+
+    private static Pattern buildPattern(String[] searchStrings) {
+        return Pattern.compile(Stream.of(searchStrings).map(Pattern::quote).collect(joining("|")));
     }
 
     private static void validateParams(String text, String[] searchStrings, String[] replacements) {
