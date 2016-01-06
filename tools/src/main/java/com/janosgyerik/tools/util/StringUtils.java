@@ -1,5 +1,7 @@
 package com.janosgyerik.tools.util;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Stream;
@@ -30,20 +32,28 @@ public final class StringUtils {
     public static String replace(String text, String[] searchStrings, String[] replacements) {
         validateParams(text, searchStrings, replacements);
 
+        if (searchStrings.length == 0) {
+            return text;
+        }
+
+        Map<String, String> searchStringsToReplacements = zipToMap(searchStrings, replacements);
         StringBuffer buffer = new StringBuffer();
-        Pattern pattern = buildPattern(searchStrings);
-        Matcher matcher = pattern.matcher(text);
+        Matcher matcher = buildPattern(searchStrings).matcher(text);
         while (matcher.find()) {
-            String match = matcher.group();
-            for (int i = 0; i < searchStrings.length; ++i) {
-                if (match.equals(searchStrings[i])) {
-                    matcher.appendReplacement(buffer, replacements[i]);
-                    break;
-                }
-            }
+            String pattern = matcher.group();
+            String replacement = searchStringsToReplacements.get(pattern);
+            matcher.appendReplacement(buffer, replacement);
         }
         matcher.appendTail(buffer);
         return buffer.toString();
+    }
+
+    private static Map<String, String> zipToMap(String[] searchStrings, String[] replacements) {
+        Map<String, String> map = new HashMap<>();
+        for (int i = 0; i < searchStrings.length; ++i) {
+            map.put(searchStrings[i], replacements[i]);
+        }
+        return map;
     }
 
     private static Pattern buildPattern(String[] searchStrings) {
