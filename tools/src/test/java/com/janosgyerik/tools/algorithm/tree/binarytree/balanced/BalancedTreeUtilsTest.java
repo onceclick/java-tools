@@ -7,17 +7,17 @@ import static org.junit.Assert.*;
 
 public class BalancedTreeUtilsTest {
     @Test
-    public void testBalanced_empty() {
+    public void test_empty_is_balanced() {
         assertTrue(BalancedTreeUtils.isBalanced(null));
     }
 
     @Test
-    public void testBalanced_singleton() {
+    public void test_singleton_is_balanced() {
         assertTrue(BalancedTreeUtils.isBalanced(new TreeNode<>(3)));
     }
 
     @Test
-    public void testBalanced_unbalanced_left() {
+    public void test_isBalanced_unbalanced_left() {
         TreeNode<Integer> root = new TreeNode<>(3);
 
         root.left = new TreeNode<>(4);
@@ -28,7 +28,7 @@ public class BalancedTreeUtilsTest {
     }
 
     @Test
-    public void testBalanced_unbalanced_right() {
+    public void test_isBalanced_unbalanced_right() {
         TreeNode<Integer> root = new TreeNode<>(3);
 
         root.left = new TreeNode<>(4);
