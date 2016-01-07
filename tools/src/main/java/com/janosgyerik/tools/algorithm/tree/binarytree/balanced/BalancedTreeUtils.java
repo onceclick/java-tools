@@ -11,20 +11,20 @@ public class BalancedTreeUtils {
     }
 
     public static boolean isBalanced(TreeNode<?> root) {
-        return getHeightIfBalanced(root) != UNBALANCED;
+        return balancedHeight(root) != UNBALANCED;
     }
 
-    private static int getHeightIfBalanced(TreeNode<?> root) {
+    private static int balancedHeight(TreeNode<?> root) {
         if (root == null) {
             return 0;
         }
 
-        int leftHeight = getHeightIfBalanced(root.left);
+        int leftHeight = balancedHeight(root.left);
         if (leftHeight == UNBALANCED) {
             return UNBALANCED;
         }
 
-        int rightHeight = getHeightIfBalanced(root.right);
+        int rightHeight = balancedHeight(root.right);
         if (rightHeight == UNBALANCED) {
             return UNBALANCED;
         }
