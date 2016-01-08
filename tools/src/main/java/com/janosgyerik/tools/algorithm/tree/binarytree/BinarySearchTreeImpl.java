@@ -1,7 +1,6 @@
 package com.janosgyerik.tools.algorithm.tree.binarytree;
 
 import java.util.Collection;
-import java.util.Iterator;
 
 public class BinarySearchTreeImpl<T extends Comparable<T>> implements BinarySearchTree<T> {
 
@@ -41,6 +40,28 @@ public class BinarySearchTreeImpl<T extends Comparable<T>> implements BinarySear
         }
     }
 
+    private void insert(TreeNode<T> node, TreeNode<T> other) {
+        if (other == null) {
+            return;
+        }
+
+        if (other.value.compareTo(node.value) < 0) {
+            if (node.left == null) {
+                node.left = other;
+                other.parent = node;
+            } else {
+                insert(node.left, other);
+            }
+        } else if (node.value.compareTo(other.value) < 0) {
+            if (node.right == null) {
+                node.right = other;
+                other.parent = node;
+            } else {
+                insert(node.right, other);
+            }
+        }
+    }
+
     private TreeNode<T> find(TreeNode<T> node, T val) {
         if (node == null) {
             return null;
@@ -67,32 +88,27 @@ public class BinarySearchTreeImpl<T extends Comparable<T>> implements BinarySear
             return;
         }
 
-        // TODO simplify when deleted node has one child null
-
         if (deleted.equals(root)) {
-            // promote the right to root. it could be the left too.
-            // of course it might be more intelligent to promote the taller branch.
-            deleted = new TreeNode<>(null);
-            deleted.left = root.left;
-            root = root.right;
+            if (root.left != null) {
+                deleted = root.right;
+                root = root.left;
+                insert(root, deleted);
+            } else if (root.right != null) {
+                root = root.right;
+            } else {
+                root = null;
+            }
         } else {
-            TreeNode<T> newDeleted = new TreeNode<>(null);
-            newDeleted.left = deleted.left;
-            newDeleted.right = deleted.right;
-
             TreeNode<T> parent = deleted.parent;
             if (parent.left == deleted) {
+                deleted = parent.left;
                 parent.left = null;
             } else {
+                deleted = parent.right;
                 parent.right = null;
             }
-            deleted = newDeleted;
-        }
-
-        Iterator<T> iterator = Iterators.levelOrderIterator(deleted);
-        iterator.next();
-        while (iterator.hasNext()) {
-            insert(iterator.next());
+            insert(parent, deleted.left);
+            insert(parent, deleted.right);
         }
     }
 }
