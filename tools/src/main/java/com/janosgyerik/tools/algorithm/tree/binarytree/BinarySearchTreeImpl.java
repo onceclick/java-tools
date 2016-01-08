@@ -12,32 +12,17 @@ public class BinarySearchTreeImpl<T extends Comparable<T>> implements BinarySear
 
     @Override
     public void insert(T val) {
+        TreeNode<T> newNode = new TreeNode<>(val);
         if (root == null) {
-            root = new TreeNode<>(val);
+            root = newNode;
         } else {
-            insert(root, val);
+            insert(root, newNode);
         }
     }
 
     @Override
     public void insertAll(Collection<T> values) {
         values.forEach(this::insert);
-    }
-
-    private void insert(TreeNode<T> node, T val) {
-        if (val.compareTo(node.value) < 0) {
-            if (node.left == null) {
-                node.left = new TreeNode<>(node, val);
-            } else {
-                insert(node.left, val);
-            }
-        } else if (node.value.compareTo(val) < 0) {
-            if (node.right == null) {
-                node.right = new TreeNode<>(node, val);
-            } else {
-                insert(node.right, val);
-            }
-        }
     }
 
     private void insert(TreeNode<T> node, TreeNode<T> other) {
