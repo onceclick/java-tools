@@ -28,14 +28,16 @@ public class BinarySearchTreeImpl<T extends Comparable<T>> implements BinarySear
     private void insert(TreeNode<T> node, TreeNode<T> other) {
         assert other != null;
 
-        if (other.value.compareTo(node.value) < 0) {
+        int compare = other.value.compareTo(node.value);
+
+        if (compare < 0) {
             if (node.left == null) {
                 node.left = other;
                 other.parent = node;
             } else {
                 insert(node.left, other);
             }
-        } else if (node.value.compareTo(other.value) < 0) {
+        } else if (compare > 0) {
             if (node.right == null) {
                 node.right = other;
                 other.parent = node;
