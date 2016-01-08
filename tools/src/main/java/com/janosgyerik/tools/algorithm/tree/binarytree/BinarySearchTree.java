@@ -11,4 +11,6 @@ public interface BinarySearchTree<T extends Comparable<T>> {
     boolean contains(T value);
 
     void delete(T value);
+
+    String serialize();
 }

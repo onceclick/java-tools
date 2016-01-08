@@ -1,6 +1,8 @@
 package com.janosgyerik.tools.algorithm.tree.binarytree;
 
 import java.util.Collection;
+import java.util.LinkedList;
+import java.util.Queue;
 
 public class BinarySearchTreeImpl<T extends Comparable<T>> implements BinarySearchTree<T> {
 
@@ -101,5 +103,27 @@ public class BinarySearchTreeImpl<T extends Comparable<T>> implements BinarySear
                 insert(parent, deleted.right);
             }
         }
+    }
+
+    @Override
+    public String serialize() {
+        StringBuilder builder = new StringBuilder();
+
+        Queue<TreeNode<T>> queue = new LinkedList<>();
+        queue.add(getRoot());
+
+        while (!queue.isEmpty()) {
+            TreeNode<T> node = queue.poll();
+            if (node == null) {
+                builder.append('#');
+            } else {
+                builder.append(node.value);
+                queue.add(node.left);
+                queue.add(node.right);
+            }
+            builder.append(',');
+        }
+
+        return builder.toString().replaceAll("[#,]+$", "");
     }
 }

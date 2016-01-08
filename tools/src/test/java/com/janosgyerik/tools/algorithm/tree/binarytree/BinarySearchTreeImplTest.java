@@ -6,8 +6,6 @@ import org.junit.Test;
 import java.util.*;
 
 import static org.junit.Assert.*;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
 
 public class BinarySearchTreeImplTest {
 
@@ -131,5 +129,41 @@ public class BinarySearchTreeImplTest {
         tree.delete(list.get(0));
         assertTrue(TreeUtils.isBinarySearchTree(tree.getRoot(), min, max));
         assertEquals(list.size() - 1, TreeUtils.size(tree.getRoot()));
+    }
+
+    private BinarySearchTree<Integer> create(Integer... values) {
+        BinarySearchTreeImpl<Integer> tree = newBinarySearchTree();
+        tree.insertAll(Arrays.asList(values));
+        return tree;
+    }
+
+    @Test
+    public void test_serialize_left_right() {
+        assertEquals("3,1,#,#,2", create(3, 1, 2).serialize());
+    }
+
+    @Test
+    public void test_serialize_left_left() {
+        assertEquals("3,2,#,1", create(3, 2, 1).serialize());
+    }
+
+    @Test
+    public void test_serialize_balanced_2_1_3() {
+        assertEquals("2,1,3", create(2, 1, 3).serialize());
+    }
+
+    @Test
+    public void test_serialize_balanced_2_3_1() {
+        assertEquals("2,1,3", create(2, 3, 1).serialize());
+    }
+
+    @Test
+    public void test_serialize_right_left() {
+        assertEquals("1,#,3,2", create(1, 3, 2).serialize());
+    }
+
+    @Test
+    public void test_serialize_right_right() {
+        assertEquals("1,#,2,#,3", create(1, 2, 3).serialize());
     }
 }
