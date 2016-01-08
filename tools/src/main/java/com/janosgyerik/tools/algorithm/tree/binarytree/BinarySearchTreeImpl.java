@@ -41,9 +41,7 @@ public class BinarySearchTreeImpl<T extends Comparable<T>> implements BinarySear
     }
 
     private void insert(TreeNode<T> node, TreeNode<T> other) {
-        if (other == null) {
-            return;
-        }
+        assert other != null;
 
         if (other.value.compareTo(node.value) < 0) {
             if (node.left == null) {
@@ -92,7 +90,9 @@ public class BinarySearchTreeImpl<T extends Comparable<T>> implements BinarySear
             if (root.left != null) {
                 deleted = root.right;
                 root = root.left;
-                insert(root, deleted);
+                if (deleted != null) {
+                    insert(root, deleted);
+                }
             } else if (root.right != null) {
                 root = root.right;
             } else {
@@ -107,8 +107,12 @@ public class BinarySearchTreeImpl<T extends Comparable<T>> implements BinarySear
                 deleted = parent.right;
                 parent.right = null;
             }
-            insert(parent, deleted.left);
-            insert(parent, deleted.right);
+            if (deleted.left != null) {
+                insert(parent, deleted.left);
+            }
+            if (deleted.right != null) {
+                insert(parent, deleted.right);
+            }
         }
     }
 }
