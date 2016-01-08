@@ -41,23 +41,23 @@ public class BinarySearchTreeImpl<T extends Comparable<T>> implements BinarySear
         }
     }
 
-    @Override
-    public boolean contains(T val) {
-        return contains(root, val);
-    }
-
-    private boolean contains(TreeNode<T> node, T val) {
+    private TreeNode<T> find(TreeNode<T> node, T val) {
         if (node == null) {
-            return false;
+            return null;
         }
-        int compare = val.compareTo(node.value);
+        int compare = node.value.compareTo(val);
         if (compare == 0) {
-            return true;
+            return node;
         }
         if (compare < 0) {
-            return contains(node.left, val);
+            return find(node.right, val);
         }
-        return contains(node.right, val);
+        return find(node.left, val);
+    }
+
+    @Override
+    public boolean contains(T val) {
+        return find(root, val) != null;
     }
 
     @Override
