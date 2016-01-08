@@ -3,6 +3,7 @@ package com.janosgyerik.tools.algorithm.tree.binarytree;
 public class TreeNode<T> {
 
     public final T value;
+    public TreeNode<T> parent;
     public TreeNode<T> left;
     public TreeNode<T> right;
 
