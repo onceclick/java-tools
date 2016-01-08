@@ -28,13 +28,13 @@ public class BinarySearchTreeImpl<T extends Comparable<T>> implements BinarySear
     private void insert(TreeNode<T> node, T val) {
         if (val.compareTo(node.value) < 0) {
             if (node.left == null) {
-                node.left = new TreeNode<>(val);
+                node.left = new TreeNode<>(node, val);
             } else {
                 insert(node.left, val);
             }
         } else if (node.value.compareTo(val) < 0) {
             if (node.right == null) {
-                node.right = new TreeNode<>(val);
+                node.right = new TreeNode<>(node, val);
             } else {
                 insert(node.right, val);
             }
@@ -62,43 +62,37 @@ public class BinarySearchTreeImpl<T extends Comparable<T>> implements BinarySear
 
     @Override
     public void delete(T val) {
-        TreeNode<T> deleted = deleteSubTree(val);
+        TreeNode<T> deleted = find(root, val);
         if (deleted == null) {
             return;
         }
+
+        // TODO simplify when deleted node has one child null
+
         if (deleted.equals(root)) {
+            // promote the right to root. it could be the left too.
+            // of course it might be more intelligent to promote the taller branch.
             deleted = new TreeNode<>(null);
             deleted.left = root.left;
             root = root.right;
+        } else {
+            TreeNode<T> newDeleted = new TreeNode<>(null);
+            newDeleted.left = deleted.left;
+            newDeleted.right = deleted.right;
+
+            TreeNode<T> parent = deleted.parent;
+            if (parent.left == deleted) {
+                parent.left = null;
+            } else {
+                parent.right = null;
+            }
+            deleted = newDeleted;
         }
+
         Iterator<T> iterator = Iterators.levelOrderIterator(deleted);
         iterator.next();
         while (iterator.hasNext()) {
             insert(iterator.next());
         }
-    }
-
-    TreeNode<T> deleteSubTree(T val) {
-        if (root == null || root.value.equals(val)) {
-            return root;
-        }
-        TreeNode<T> deleted = null;
-        TreeNode<T> node = root;
-        while (node != null) {
-            if (node.value.compareTo(val) > 0) {
-                if (node.left.value.equals(val)) {
-                    deleted = node.left;
-                    node.left = null;
-                }
-                node = node.left;
-            } else {
-                if (node.right.value.equals(val)) {
-                    deleted = node.right;
-                    node.right = null;
-                }
-                node = node.right;
-            }
-        }
-        return deleted;
     }
 }
