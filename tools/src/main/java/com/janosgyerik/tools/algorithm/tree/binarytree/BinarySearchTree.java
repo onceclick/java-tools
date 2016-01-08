@@ -4,11 +4,11 @@ import java.util.Collection;
 
 public interface BinarySearchTree<T extends Comparable<T>> {
 
-    void insert(T val);
+    void insert(T value);
 
-    void insertAll(Collection<T> val);
+    void insertAll(Collection<T> value);
 
-    boolean contains(T val);
+    boolean contains(T value);
 
-    void delete(T val);
+    void delete(T value);
 }

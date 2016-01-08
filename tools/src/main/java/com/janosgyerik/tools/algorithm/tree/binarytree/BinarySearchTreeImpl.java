@@ -11,8 +11,8 @@ public class BinarySearchTreeImpl<T extends Comparable<T>> implements BinarySear
     }
 
     @Override
-    public void insert(T val) {
-        TreeNode<T> newNode = new TreeNode<>(val);
+    public void insert(T value) {
+        TreeNode<T> newNode = new TreeNode<>(value);
         if (root == null) {
             root = newNode;
         } else {
@@ -47,28 +47,28 @@ public class BinarySearchTreeImpl<T extends Comparable<T>> implements BinarySear
         }
     }
 
-    private TreeNode<T> find(TreeNode<T> node, T val) {
+    private TreeNode<T> find(TreeNode<T> node, T value) {
         if (node == null) {
             return null;
         }
-        int compare = node.value.compareTo(val);
+        int compare = node.value.compareTo(value);
         if (compare == 0) {
             return node;
         }
         if (compare < 0) {
-            return find(node.right, val);
+            return find(node.right, value);
         }
-        return find(node.left, val);
+        return find(node.left, value);
     }
 
     @Override
-    public boolean contains(T val) {
-        return find(root, val) != null;
+    public boolean contains(T value) {
+        return find(root, value) != null;
     }
 
     @Override
-    public void delete(T val) {
-        TreeNode<T> deleted = find(root, val);
+    public void delete(T value) {
+        TreeNode<T> deleted = find(root, value);
         if (deleted == null) {
             return;
         }
