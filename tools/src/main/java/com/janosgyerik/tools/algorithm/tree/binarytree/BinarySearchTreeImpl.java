@@ -7,7 +7,6 @@ public class BinarySearchTreeImpl<T extends Comparable<T>> implements BinarySear
 
     private TreeNode<T> root = null;
 
-    @Override
     public TreeNode<T> getRoot() {
         return root;
     }
