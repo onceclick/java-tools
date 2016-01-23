@@ -54,16 +54,14 @@ public final class Counters {
 
         private final List<Map.Entry<T, Integer>> sortedEntries = new ArrayList<>();
 
-        private volatile boolean modifiedSinceLastBuild;
+        private boolean modifiedSinceLastBuild;
 
-        void ensureSortedEntries() {
+        private void ensureSortedEntries() {
             if (modifiedSinceLastBuild) {
-                synchronized (this) {
-                    sortedEntries.clear();
-                    sortedEntries.addAll(counter.entrySet());
-                    sortedEntries.sort(countComparator);
-                    modifiedSinceLastBuild = false;
-                }
+                sortedEntries.clear();
+                sortedEntries.addAll(counter.entrySet());
+                sortedEntries.sort(countComparator);
+                modifiedSinceLastBuild = false;
             }
         }
 
