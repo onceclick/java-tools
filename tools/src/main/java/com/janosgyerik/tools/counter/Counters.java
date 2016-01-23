@@ -21,11 +21,7 @@ public final class Counters {
 
         @Override
         public void add(T item) {
-            Integer count = counts.get(item);
-            if (count == null) {
-                count = 0;
-            }
-            counts.put(item, count + 1);
+            counts.put(item, get(item) + 1);
         }
 
         @Override
