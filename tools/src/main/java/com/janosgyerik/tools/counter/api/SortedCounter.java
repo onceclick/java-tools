@@ -5,17 +5,17 @@ import java.util.Map;
 
 public interface SortedCounter<T> extends Counter<T> {
 
-    Map.Entry<T, Integer> topEntry();
+    Map.Entry<T, Integer> firstEntry();
 
-    T top();
+    T first();
 
-    int topCount();
+    int firstCount();
 
-    Map.Entry<T, Integer> bottomEntry();
+    Map.Entry<T, Integer> lastEntry();
 
-    T bottom();
+    T last();
 
-    int bottomCount();
+    int lastCount();
 
     Map.Entry<T, Integer> nthEntry(int n);
 

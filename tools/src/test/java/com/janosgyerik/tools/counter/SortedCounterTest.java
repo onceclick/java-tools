@@ -1,6 +1,5 @@
 package com.janosgyerik.tools.counter;
 
-import com.janosgyerik.tools.counter.Counters;
 import com.janosgyerik.tools.counter.api.SortedCounter;
 import org.junit.Test;
 
@@ -13,28 +12,28 @@ public class SortedCounterTest {
     public void test_top() {
         SortedCounter<Integer> counter = Counters.sortedCounter();
         counter.addAll(Arrays.asList(1, 4, 9, 3, 4, 5, 4, 9));
-        assertEquals(new Integer(4), counter.top());
+        assertEquals(new Integer(4), counter.first());
     }
 
     @Test
     public void test_topCount() {
         SortedCounter<Integer> counter = Counters.sortedCounter();
         counter.addAll(Arrays.asList(1, 4, 9, 3, 4, 5, 4, 9));
-        assertEquals(3, counter.topCount());
+        assertEquals(3, counter.firstCount());
     }
 
     @Test
     public void test_bottom() {
         SortedCounter<Integer> counter = Counters.sortedCounter();
         counter.addAll(Arrays.asList(1, 4, 9, 3, 4, 5, 4, 9));
-        assertEquals(new Integer(1), counter.bottom());
+        assertEquals(new Integer(1), counter.last());
     }
 
     @Test
     public void test_bottomCount() {
         SortedCounter<Integer> counter = Counters.sortedCounter();
         counter.addAll(Arrays.asList(1, 4, 9, 3, 4, 5, 4, 9));
-        assertEquals(1, counter.bottomCount());
+        assertEquals(1, counter.lastCount());
     }
 
     @Test
@@ -51,7 +50,7 @@ public class SortedCounterTest {
         for (char c : text.replace(" ", "").toCharArray()) {
             counter.add(c);
         }
-        assertEquals(new Character('i'), counter.top());
+        assertEquals(new Character('i'), counter.first());
     }
 
     @Test

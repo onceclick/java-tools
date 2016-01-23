@@ -66,35 +66,35 @@ public final class Counters {
         }
 
         @Override
-        public Map.Entry<T, Integer> topEntry() {
+        public Map.Entry<T, Integer> firstEntry() {
             ensureSortedEntries();
             return sortedEntries.get(sortedEntries.size() - 1);
         }
 
         @Override
-        public T top() {
-            return topEntry().getKey();
+        public T first() {
+            return firstEntry().getKey();
         }
 
         @Override
-        public int topCount() {
-            return topEntry().getValue();
+        public int firstCount() {
+            return firstEntry().getValue();
         }
 
         @Override
-        public Map.Entry<T, Integer> bottomEntry() {
+        public Map.Entry<T, Integer> lastEntry() {
             ensureSortedEntries();
             return sortedEntries.get(0);
         }
 
         @Override
-        public T bottom() {
-            return bottomEntry().getKey();
+        public T last() {
+            return lastEntry().getKey();
         }
 
         @Override
-        public int bottomCount() {
-            return bottomEntry().getValue();
+        public int lastCount() {
+            return lastEntry().getValue();
         }
 
         @Override
