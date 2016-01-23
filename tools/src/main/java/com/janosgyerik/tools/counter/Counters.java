@@ -54,14 +54,14 @@ public final class Counters {
 
         private final List<Map.Entry<T, Integer>> sortedEntries = new ArrayList<>();
 
-        private boolean modifiedSinceLastBuild;
+        private boolean modifiedSinceLastSort;
 
         private void ensureSortedEntries() {
-            if (modifiedSinceLastBuild) {
+            if (modifiedSinceLastSort) {
                 sortedEntries.clear();
                 sortedEntries.addAll(counter.entrySet());
                 sortedEntries.sort(countComparator);
-                modifiedSinceLastBuild = false;
+                modifiedSinceLastSort = false;
             }
         }
 
@@ -122,13 +122,13 @@ public final class Counters {
         @Override
         public void add(T item) {
             counter.add(item);
-            modifiedSinceLastBuild = true;
+            modifiedSinceLastSort = true;
         }
 
         @Override
         public void addAll(Collection<T> items) {
             counter.addAll(items);
-            modifiedSinceLastBuild = true;
+            modifiedSinceLastSort = true;
         }
 
         @Override
