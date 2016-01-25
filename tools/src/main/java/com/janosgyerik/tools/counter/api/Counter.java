@@ -6,7 +6,7 @@ import java.util.Map;
 /**
  * Build a map of counts of objects.
  *
- * @param <T>
+ * @param <T> type of the counted objects
  */
 public interface Counter<T> {
 
