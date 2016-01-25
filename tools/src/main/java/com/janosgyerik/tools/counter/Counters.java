@@ -62,35 +62,35 @@ public final class Counters {
         }
 
         @Override
-        public Map.Entry<T, Integer> firstEntry() {
+        public Map.Entry<T, Integer> highestEntry() {
             ensureSortedEntries();
             return sortedEntries.get(sortedEntries.size() - 1);
         }
 
         @Override
-        public T first() {
-            return firstEntry().getKey();
+        public T highest() {
+            return highestEntry().getKey();
         }
 
         @Override
-        public int firstCount() {
-            return firstEntry().getValue();
+        public int highestCount() {
+            return highestEntry().getValue();
         }
 
         @Override
-        public Map.Entry<T, Integer> lastEntry() {
+        public Map.Entry<T, Integer> lowestEntry() {
             ensureSortedEntries();
             return sortedEntries.get(0);
         }
 
         @Override
-        public T last() {
-            return lastEntry().getKey();
+        public T lowest() {
+            return lowestEntry().getKey();
         }
 
         @Override
-        public int lastCount() {
-            return lastEntry().getValue();
+        public int lowestCount() {
+            return lowestEntry().getValue();
         }
 
         @Override

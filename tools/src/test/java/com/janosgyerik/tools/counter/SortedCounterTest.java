@@ -12,28 +12,28 @@ public class SortedCounterTest {
     public void test_top() {
         SortedCounter<Integer> counter = Counters.sortedCounter();
         counter.addAll(Arrays.asList(1, 4, 9, 3, 4, 5, 4, 9));
-        assertEquals(new Integer(4), counter.first());
+        assertEquals(new Integer(4), counter.highest());
     }
 
     @Test
     public void test_topCount() {
         SortedCounter<Integer> counter = Counters.sortedCounter();
         counter.addAll(Arrays.asList(1, 4, 9, 3, 4, 5, 4, 9));
-        assertEquals(3, counter.firstCount());
+        assertEquals(3, counter.highestCount());
     }
 
     @Test
     public void test_bottom() {
         SortedCounter<Integer> counter = Counters.sortedCounter();
         counter.addAll(Arrays.asList(1, 4, 9, 3, 4, 5, 4, 9));
-        assertEquals(new Integer(1), counter.last());
+        assertEquals(new Integer(1), counter.lowest());
     }
 
     @Test
     public void test_bottomCount() {
         SortedCounter<Integer> counter = Counters.sortedCounter();
         counter.addAll(Arrays.asList(1, 4, 9, 3, 4, 5, 4, 9));
-        assertEquals(1, counter.lastCount());
+        assertEquals(1, counter.lowestCount());
     }
 
     @Test
@@ -50,7 +50,7 @@ public class SortedCounterTest {
         for (char c : text.replace(" ", "").toCharArray()) {
             counter.add(c);
         }
-        assertEquals(new Character('i'), counter.first());
+        assertEquals(new Character('i'), counter.highest());
     }
 
     @Test

@@ -16,42 +16,42 @@ public interface SortedCounter<T> extends Counter<T> {
      *
      * @return the item -> count pair with the highest count
      */
-    Map.Entry<T, Integer> firstEntry();
+    Map.Entry<T, Integer> highestEntry();
 
     /**
      * Convenience method to get the item with the highest count
      *
      * @return the item with the highest count
      */
-    T first();
+    T highest();
 
     /**
      * Convenience method to get the count of the item with the highest count
      *
      * @return the count of the item
      */
-    int firstCount();
+    int highestCount();
 
     /**
      * Get the entry with the lowest count, as a pair of item -> count
      *
      * @return the item -> count pair with the lowest count
      */
-    Map.Entry<T, Integer> lastEntry();
+    Map.Entry<T, Integer> lowestEntry();
 
     /**
      * Convenience method to get the item with the lowest count
      *
      * @return the item with the lowest count
      */
-    T last();
+    T lowest();
 
     /**
      * Convenience method to get the count of the item with the lowest count
      *
      * @return the count of the item
      */
-    int lastCount();
+    int lowestCount();
 
     /**
      * Get the n-th entry by count, as a pair of item -> count.
