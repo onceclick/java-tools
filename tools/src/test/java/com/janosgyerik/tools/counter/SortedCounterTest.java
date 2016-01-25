@@ -77,7 +77,7 @@ public class SortedCounterTest {
         counter.add("hi");
         counter.add("hi");
         counter.add("hello");
-        assertEquals("[hello=1, hi=2]", counter.sortedEntrySet().toString());
+        assertEquals("[hello=1, hi=2]", counter.sortedEntryList().toString());
     }
 
     @Test
@@ -86,7 +86,7 @@ public class SortedCounterTest {
         counter.add("hello");
         counter.add("hi");
         counter.add("hi");
-        assertEquals("[hello=1, hi=2]", counter.sortedEntrySet().toString());
+        assertEquals("[hello=1, hi=2]", counter.sortedEntryList().toString());
     }
 
     @Test
@@ -97,6 +97,6 @@ public class SortedCounterTest {
         counter.add("hi");
         counter.add("hello");
         counter.add("hello");
-        assertEquals("[hi=2, hello=3]", counter.sortedEntrySet().toString());
+        assertEquals("[hi=2, hello=3]", counter.sortedEntryList().toString());
     }
 }

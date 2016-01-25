@@ -82,5 +82,5 @@ public interface SortedCounter<T> extends Counter<T> {
      *
      * @return list of item -> count pairs
      */
-    List<Map.Entry<T, Integer>> sortedEntrySet();
+    List<Map.Entry<T, Integer>> sortedEntryList();
 }
