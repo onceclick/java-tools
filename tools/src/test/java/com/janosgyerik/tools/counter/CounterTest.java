@@ -14,22 +14,22 @@ public class CounterTest {
     @Test
     public void test_add_one() {
         Counter<String> counter = Counters.counter();
-        assertTrue(counter.entrySet().isEmpty());
+        assertTrue(counter.map().isEmpty());
 
         counter.add("hello");
-        assertFalse(counter.entrySet().isEmpty());
+        assertFalse(counter.map().isEmpty());
     }
 
     @Test
     public void test_add_one_twice() {
         Counter<String> counter = Counters.counter();
-        assertTrue(counter.entrySet().isEmpty());
+        assertTrue(counter.map().isEmpty());
 
         counter.add("hello");
-        assertEquals(1, counter.entrySet().size());
+        assertEquals(1, counter.map().size());
 
         counter.add("hello");
-        assertEquals(1, counter.entrySet().size());
+        assertEquals(1, counter.map().size());
     }
 
     @Test
@@ -48,7 +48,7 @@ public class CounterTest {
         Map<String, Integer> entries = new HashMap<>();
         entries.put("hello", 3);
         entries.put("world", 1);
-        assertEquals(entries.entrySet(), counter.entrySet());
+        assertEquals(entries, counter.map());
     }
 
     @Test

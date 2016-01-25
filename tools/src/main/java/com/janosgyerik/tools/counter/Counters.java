@@ -30,8 +30,8 @@ public final class Counters {
         }
 
         @Override
-        public Set<Map.Entry<T, Integer>> entrySet() {
-            return counts.entrySet();
+        public Map<T, Integer> map() {
+            return counts;
         }
 
         @Override
@@ -55,7 +55,7 @@ public final class Counters {
         private void ensureSortedEntries() {
             if (modifiedSinceLastSort) {
                 sortedEntries.clear();
-                sortedEntries.addAll(counter.entrySet());
+                sortedEntries.addAll(counter.map().entrySet());
                 sortedEntries.sort(countComparator);
                 modifiedSinceLastSort = false;
             }
@@ -128,8 +128,8 @@ public final class Counters {
         }
 
         @Override
-        public Set<Map.Entry<T, Integer>> entrySet() {
-            return counter.entrySet();
+        public Map<T, Integer> map() {
+            return counter.map();
         }
 
         @Override
