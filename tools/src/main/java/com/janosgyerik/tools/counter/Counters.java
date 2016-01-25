@@ -110,7 +110,7 @@ public final class Counters {
         }
 
         @Override
-        public Collection<Map.Entry<T, Integer>> sortedEntrySet() {
+        public List<Map.Entry<T, Integer>> sortedEntrySet() {
             ensureSortedEntries();
             return sortedEntries;
         }

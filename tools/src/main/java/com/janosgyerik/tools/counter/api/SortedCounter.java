@@ -1,6 +1,6 @@
 package com.janosgyerik.tools.counter.api;
 
-import java.util.Collection;
+import java.util.List;
 import java.util.Map;
 
 public interface SortedCounter<T> extends Counter<T> {
@@ -23,5 +23,5 @@ public interface SortedCounter<T> extends Counter<T> {
 
     int nthCount(int n);
 
-    Collection<Map.Entry<T, Integer>> sortedEntrySet();
+    List<Map.Entry<T, Integer>> sortedEntrySet();
 }
