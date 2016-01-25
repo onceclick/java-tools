@@ -68,6 +68,7 @@ public class SortedCounterTest {
             counter.add(c);
         }
         assertEquals(new Character('i'), counter.nth(2));
+        assertEquals(43, counter.nthCount(2));
     }
 
     @Test
