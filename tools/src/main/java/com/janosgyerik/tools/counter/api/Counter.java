@@ -9,7 +9,7 @@ public interface Counter<T> {
 
     void addAll(Collection<T> items);
 
-    Map<T, Integer> map();
-
     int get(T item);
+
+    Map<T, Integer> map();
 }
