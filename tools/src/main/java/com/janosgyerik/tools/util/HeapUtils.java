@@ -32,35 +32,24 @@ public final class HeapUtils {
         for (int i = 0; i < arr.length - 1; ++i) {
             int leftIndex = getLeftIndex(i);
             if (leftIndex < arr.length) {
-                int left = arr[leftIndex];
-                if (arr[i] < left) {
-                    swap(arr, i, leftIndex);
-                    siftUp(arr, i);
-                }
-            }
-
-            int rightIndex = getRightIndex(i);
-            if (rightIndex < arr.length) {
-                int right = arr[rightIndex];
-                if (arr[i] < right) {
-                    swap(arr, i, rightIndex);
-                    siftUp(arr, i);
+                siftUp(arr, leftIndex);
+                int rightIndex = getRightIndex(i);
+                if (rightIndex < arr.length) {
+                    siftUp(arr, rightIndex);
                 }
             }
         }
     }
 
     private static void siftUp(int[] arr, int index) {
-        for (int i = index; i > 0; ) {
-            int parentIndex = getParentIndex(i);
-            int parent = arr[parentIndex];
-            int item = arr[i];
-            if (parent >= item) {
+        do {
+            int parentIndex = getParentIndex(index);
+            if (arr[parentIndex] >= arr[index]) {
                 break;
             }
-            swap(arr, parentIndex, i);
-            i = parentIndex;
-        }
+            swap(arr, parentIndex, index);
+            index = parentIndex;
+        } while (index != 0);
     }
 
     private static void swap(int[] arr, int i, int j) {
