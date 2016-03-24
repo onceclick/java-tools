@@ -42,14 +42,15 @@ public final class IterTools {
     }
 
     public static <T> Iterator<List<T>> permutationIterator(List<T> list) {
-        int maxCount = factorial(list.size());
+        int size = list.size();
+        int maxCount = factorial(size);
 
         return new Iterator<List<T>>() {
             int count = 0;
             int[] indexes = createInitialIndexes();
 
             private int[] createInitialIndexes() {
-                int[] indexes = new int[list.size()];
+                int[] indexes = new int[size];
                 for (int i = 0; i < indexes.length; ++i) {
                     indexes[i] = i;
                 }
@@ -63,7 +64,7 @@ public final class IterTools {
 
             @Override
             public List<T> next() {
-                List<T> current = new ArrayList<>(list.size());
+                List<T> current = new ArrayList<>(size);
                 for (int index : indexes) {
                     current.add(list.get(index));
                 }
