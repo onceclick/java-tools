@@ -48,6 +48,7 @@ public final class IterTools {
         return new Iterator<List<T>>() {
             int count = 0;
             int[] indexes = createInitialIndexes();
+            List<Integer> temp = new ArrayList<>(indexes.length);
 
             private int[] createInitialIndexes() {
                 int[] indexes = new int[size];
@@ -93,16 +94,16 @@ public final class IterTools {
                 int toInsert = indexes[i];
                 indexes[i] = indexes[j];
 
-                // TODO improve this very dumb impl
-                List<Integer> copy = new ArrayList<>(indexes.length - i); copy.add(toInsert);
-                for (int k = i + 1; k < indexes.length; ++k) {
+                temp.clear();
+                for (int k = indexes.length - 1; k > i; --k) {
                     if (k != j) {
-                        copy.add(indexes[k]);
+                        temp.add(indexes[k]);
                     }
                 }
-                Collections.sort(copy);
+                temp.add(toInsert);
+                Collections.sort(temp);
                 for (int k = i + 1, x = 0; k < indexes.length; ++k, ++x) {
-                    indexes[k] = copy.get(x);
+                    indexes[k] = temp.get(x);
                 }
             }
         };
