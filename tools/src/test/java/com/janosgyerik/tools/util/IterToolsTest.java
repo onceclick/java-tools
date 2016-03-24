@@ -4,6 +4,7 @@ import org.junit.Test;
 
 import java.util.*;
 
+import static com.janosgyerik.tools.util.IterTools.permutationIterator;
 import static com.janosgyerik.tools.util.IterTools.toList;
 import static org.junit.Assert.assertEquals;
 
@@ -91,5 +92,11 @@ public class IterToolsTest {
                 Arrays.asList(3, 1, 2),
                 Arrays.asList(3, 2, 1)
         ), permutations);
+    }
+
+    @Test
+    public void should_get_equal_permutations_from_recursion_and_iterator() {
+        List<Integer> list = Arrays.asList(1, 2, 3, 4, 5, 6);
+        assertEquals(makeSet(toList(permutationIterator(list))), permutations(list));
     }
 }
