@@ -45,4 +45,9 @@ public class IterToolsTest {
                         Arrays.asList(2, 3, 1), Arrays.asList(3, 1, 2), Arrays.asList(3, 2, 1))),
                 permutations(Arrays.asList(1, 2, 3)));
     }
+
+    @Test
+    public void test_permutationGenerator_a_b_c() {
+        Iterator<List<Character>> it = IterTools.permutationIterator(Arrays.asList('a', 'b', 'c'));
+    }
 }
