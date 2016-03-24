@@ -47,6 +47,18 @@ public class IterToolsTest {
     }
 
     @Test
+    public void should_get_equal_list_from_iterator() {
+        List<Integer> list = Arrays.asList(3, 1, 4, 5, 2);
+        assertEquals(list, IterTools.toList(list.iterator()));
+    }
+
+    @Test
+    public void should_get_empty_list_from_empty_iterator() {
+        List<Integer> list = Collections.emptyList();
+        assertEquals(list, IterTools.toList(list.iterator()));
+    }
+
+    @Test
     public void test_permutationGenerator_a_b_c() {
         Iterator<List<Character>> it = IterTools.permutationIterator(Arrays.asList('a', 'b', 'c'));
     }

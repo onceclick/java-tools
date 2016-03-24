@@ -114,4 +114,16 @@ public final class IterTools {
         }
         return n * factorial(n - 1);
     }
+
+    public static <T> List<T> toList(Iterator<T> iterator) {
+        List<T> list = new ArrayList<>();
+        toList(iterator, list);
+        return list;
+    }
+
+    public static <T> void toList(Iterator<T> iterator, List<T> list) {
+        while (iterator.hasNext()) {
+            list.add(iterator.next());
+        }
+    }
 }
