@@ -68,12 +68,14 @@ public final class IterTools {
                     current.add(list.get(index));
                 }
 
-                ++count;
-
-                if (!hasNext()) {
-                    return current;
+                if (++count < maxCount) {
+                    updateIndexes();
                 }
 
+                return current;
+            }
+
+            private void updateIndexes() {
                 int i = indexes.length - 2;
                 for (; i >= 0; --i) {
                     if (indexes[i] < indexes[i + 1]) {
@@ -91,8 +93,7 @@ public final class IterTools {
                 indexes[i] = indexes[j];
 
                 // TODO improve this very dumb impl
-                List<Integer> copy = new ArrayList<>(indexes.length - i);
-                copy.add(toInsert);
+                List<Integer> copy = new ArrayList<>(indexes.length - i); copy.add(toInsert);
                 for (int k = i + 1; k < indexes.length; ++k) {
                     if (k != j) {
                         copy.add(indexes[k]);
@@ -102,8 +103,6 @@ public final class IterTools {
                 for (int k = i + 1, x = 0; k < indexes.length; ++k, ++x) {
                     indexes[k] = copy.get(x);
                 }
-
-                return current;
             }
         };
     }
