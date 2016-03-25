@@ -48,7 +48,6 @@ public final class IterTools {
         return new Iterator<List<T>>() {
             int count = 0;
             int[] indexes = createInitialIndexes();
-            List<Integer> temp = new ArrayList<>(indexes.length);
 
             private int[] createInitialIndexes() {
                 int[] indexes = new int[size];
@@ -91,20 +90,18 @@ public final class IterTools {
                     }
                 }
 
-                int toInsert = indexes[i];
-                indexes[i] = indexes[j];
+                swap(i, j);
 
-                temp.clear();
-                for (int k = indexes.length - 1; k > i; --k) {
-                    if (k != j) {
-                        temp.add(indexes[k]);
-                    }
+                int half = (indexes.length - i) / 2;
+                for (int k = 1; k <= half; ++k) {
+                    swap(i + k, indexes.length - k);
                 }
-                temp.add(toInsert);
-                Collections.sort(temp);
-                for (int k = i + 1, x = 0; k < indexes.length; ++k, ++x) {
-                    indexes[k] = temp.get(x);
-                }
+            }
+
+            private void swap(int i, int j) {
+                int tmp = indexes[i];
+                indexes[i] = indexes[j];
+                indexes[j] = tmp;
             }
         };
     }
