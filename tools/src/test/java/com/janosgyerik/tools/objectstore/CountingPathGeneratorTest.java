@@ -8,7 +8,7 @@ import java.util.NoSuchElementException;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
-public class PathGeneratorTest {
+public class CountingPathGeneratorTest {
     @Test
     public void first_3_of_one_level_10_should_be_1_2_3() {
         CountingPathGenerator gen = new CountingPathGenerator(1, 10, Paths.get("."));
