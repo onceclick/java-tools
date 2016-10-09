@@ -44,10 +44,8 @@ public class SimpleObjectStore<K, V> implements ObjectStore<K, V> {
             index.put(key, path);
 
             File parentFile = path.toFile().getParentFile();
-            if (!parentFile.isDirectory()) {
-                if (!parentFile.mkdirs()) {
-                    throw new IOException("could not create directory: " + parentFile);
-                }
+            if (!parentFile.isDirectory() && !parentFile.mkdirs()) {
+                throw new IOException("could not create directory: " + parentFile);
             }
         }
         try (OutputStream out = Files.newOutputStream(path)) {
