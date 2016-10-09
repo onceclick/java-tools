@@ -7,6 +7,7 @@ import java.io.OutputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 import java.util.Optional;
 
@@ -14,11 +15,11 @@ public class SimpleObjectStore<K, V> implements ObjectStore<K, V> {
 
     private final Map<K, Path> index = new HashMap<>();
 
-    private final CountingPathGenerator pathGenerator;
+    private final Iterator<Path> pathGenerator;
     private final Reader<V> reader;
     private final Writer<V> writer;
 
-    public SimpleObjectStore(CountingPathGenerator pathGenerator, Reader<V> reader, Writer<V> writer) {
+    public SimpleObjectStore(Iterator<Path> pathGenerator, Reader<V> reader, Writer<V> writer) {
         this.pathGenerator = pathGenerator;
         this.reader = reader;
         this.writer = writer;
