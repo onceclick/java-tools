@@ -4,7 +4,7 @@ import java.nio.file.Path;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
 
-public class PathGenerator implements Iterator<Path> {
+public class CountingPathGenerator implements Iterator<Path> {
 
     private final AtomicInteger counter = new AtomicInteger(0);
 
@@ -14,7 +14,7 @@ public class PathGenerator implements Iterator<Path> {
 
     private final int limit;
 
-    public PathGenerator(int levels, int filesPerLevel, Path base) {
+    public CountingPathGenerator(int levels, int filesPerLevel, Path base) {
         if (levels < 1) {
             throw new IllegalArgumentException("levels must be > 0");
         }

@@ -14,11 +14,11 @@ public class SimpleObjectStore<K, V> implements ObjectStore<K, V> {
 
     private final Map<K, Path> index = new HashMap<>();
 
-    private final PathGenerator pathGenerator;
+    private final CountingPathGenerator pathGenerator;
     private final Reader<V> reader;
     private final Writer<V> writer;
 
-    public SimpleObjectStore(PathGenerator pathGenerator, Reader<V> reader, Writer<V> writer) {
+    public SimpleObjectStore(CountingPathGenerator pathGenerator, Reader<V> reader, Writer<V> writer) {
         this.pathGenerator = pathGenerator;
         this.reader = reader;
         this.writer = writer;
