@@ -5,7 +5,9 @@ import org.junit.Test;
 import java.util.*;
 
 import static com.janosgyerik.tools.util.IterTools.permutationIterator;
+import static com.janosgyerik.tools.util.IterTools.permutations;
 import static com.janosgyerik.tools.util.IterTools.toList;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.assertEquals;
 
 public class IterToolsTest {
@@ -98,5 +100,17 @@ public class IterToolsTest {
     public void should_get_equal_permutations_from_recursion_and_iterator() {
         List<Integer> list = Arrays.asList(1, 2, 3, 4, 5, 6);
         assertEquals(makeSet(toList(permutationIterator(list))), permutations(list));
+    }
+
+    @Test
+    public void test_permutations() {
+        assertThat(IterTools.permutations(3)).containsExactly(
+                Arrays.asList(1, 2, 3),
+                Arrays.asList(1, 3, 2),
+                Arrays.asList(2, 1, 3),
+                Arrays.asList(2, 3, 1),
+                Arrays.asList(3, 1, 2),
+                Arrays.asList(3, 2, 1)
+        );
     }
 }

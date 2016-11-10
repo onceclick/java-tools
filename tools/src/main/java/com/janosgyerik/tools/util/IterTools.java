@@ -1,6 +1,8 @@
 package com.janosgyerik.tools.util;
 
 import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public final class IterTools {
 
@@ -39,6 +41,11 @@ public final class IterTools {
             }
         }
         return result;
+    }
+
+    public static Iterable<List<Integer>> permutations(int n) {
+        List<Integer> nums = IntStream.rangeClosed(1, n).boxed().collect(Collectors.toList());
+        return () -> permutationIterator(nums);
     }
 
     public static <T> Iterator<List<T>> permutationIterator(List<T> list) {
