@@ -48,69 +48,79 @@ public final class IterTools {
         return () -> permutationIterator(nums);
     }
 
+    private static class PermutationIterator<T> implements Iterator<List<T>> {
+        private final List<T> list;
+        private final int size;
+        private final int maxCount;
+        private final int[] indexes;
+
+        int count = 0;
+
+        PermutationIterator(List<T> list) {
+            this.list = list;
+            this.size = list.size();
+            maxCount = factorial(size);
+            indexes = createInitialIndexes();
+        }
+
+        private int[] createInitialIndexes() {
+            int[] indexes = new int[size];
+            for (int i = 0; i < indexes.length; ++i) {
+                indexes[i] = i;
+            }
+            return indexes;
+        }
+
+        @Override
+        public boolean hasNext() {
+            return count < maxCount;
+        }
+
+        @Override
+        public List<T> next() {
+            List<T> current = new ArrayList<>(size);
+            for (int index : indexes) {
+                current.add(list.get(index));
+            }
+
+            if (++count < maxCount) {
+                updateIndexes();
+            }
+
+            return current;
+        }
+
+        private void updateIndexes() {
+            int i = indexes.length - 2;
+            for (; i >= 0; --i) {
+                if (indexes[i] < indexes[i + 1]) {
+                    break;
+                }
+            }
+            int j = indexes.length - 1;
+            for (; ; j--) {
+                if (indexes[j] > indexes[i]) {
+                    break;
+                }
+            }
+
+            swap(i, j);
+
+            int half = (indexes.length - i) / 2;
+            for (int k = 1; k <= half; ++k) {
+                swap(i + k, indexes.length - k);
+            }
+        }
+
+        private void swap(int i, int j) {
+            int tmp = indexes[i];
+            indexes[i] = indexes[j];
+            indexes[j] = tmp;
+        }
+    }
+
     public static <T> Iterator<List<T>> permutationIterator(List<T> list) {
-        int size = list.size();
-        int maxCount = factorial(size);
-
-        return new Iterator<List<T>>() {
-            int count = 0;
-            int[] indexes = createInitialIndexes();
-
-            private int[] createInitialIndexes() {
-                int[] indexes = new int[size];
-                for (int i = 0; i < indexes.length; ++i) {
-                    indexes[i] = i;
-                }
-                return indexes;
-            }
-
-            @Override
-            public boolean hasNext() {
-                return count < maxCount;
-            }
-
-            @Override
-            public List<T> next() {
-                List<T> current = new ArrayList<>(size);
-                for (int index : indexes) {
-                    current.add(list.get(index));
-                }
-
-                if (++count < maxCount) {
-                    updateIndexes();
-                }
-
-                return current;
-            }
-
-            private void updateIndexes() {
-                int i = indexes.length - 2;
-                for (; i >= 0; --i) {
-                    if (indexes[i] < indexes[i + 1]) {
-                        break;
-                    }
-                }
-                int j = indexes.length - 1;
-                for (;; j--) {
-                    if (indexes[j] > indexes[i]) {
-                        break;
-                    }
-                }
-
-                swap(i, j);
-
-                int half = (indexes.length - i) / 2;
-                for (int k = 1; k <= half; ++k) {
-                    swap(i + k, indexes.length - k);
-                }
-            }
-
-            private void swap(int i, int j) {
-                int tmp = indexes[i];
-                indexes[i] = indexes[j];
-                indexes[j] = tmp;
-            }
-        };
+        return new PermutationIterator<>(list);
     }
 
     private static int factorial(int n) {
