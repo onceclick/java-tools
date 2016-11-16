@@ -3,9 +3,9 @@ package com.janosgyerik.tools.util;
 import org.junit.Test;
 
 import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
-import static com.janosgyerik.tools.util.IterTools.permutationIterator;
-import static com.janosgyerik.tools.util.IterTools.permutations;
 import static com.janosgyerik.tools.util.IterTools.toList;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.assertEquals;
@@ -64,19 +64,19 @@ public class IterToolsTest {
 
     @Test
     public void should_get_1_empty_permutation_for_empty_list() {
-        List<List<Integer>> permutations = toList(IterTools.permutationIterator(Collections.emptyList()));
+        Set<List<Integer>> permutations = IterTools.permutations(Collections.emptyList());
         assertEquals(Collections.singletonList(Collections.emptyList()), permutations);
     }
 
     @Test
     public void should_get_1_permutation_for_singleton_list() {
-        List<List<Integer>> permutations = toList(IterTools.permutationIterator(Collections.singletonList(7)));
+        Set<List<Integer>> permutations = IterTools.permutations(Collections.singletonList(7));
         assertEquals(Collections.singletonList(Collections.singletonList(7)), permutations);
     }
 
     @Test
     public void should_get_2_ordered_permutations_for_x_y() {
-        List<List<Character>> permutations = toList(IterTools.permutationIterator(Arrays.asList('x', 'y')));
+        Set<List<Character>> permutations = IterTools.permutations(Arrays.asList('x', 'y'));
         assertEquals(Arrays.asList(
                 Arrays.asList('x', 'y'),
                 Arrays.asList('y', 'x')
@@ -85,7 +85,7 @@ public class IterToolsTest {
 
     @Test
     public void should_get_6_ordered_permutations_for_1_2_3() {
-        List<List<Integer>> permutations = toList(IterTools.permutationIterator(Arrays.asList(1, 2, 3)));
+        Set<List<Integer>> permutations = IterTools.permutations(Arrays.asList(1, 2, 3));
         assertEquals(Arrays.asList(
                 Arrays.asList(1, 2, 3),
                 Arrays.asList(1, 3, 2),
@@ -99,7 +99,8 @@ public class IterToolsTest {
     @Test
     public void should_get_equal_permutations_from_recursion_and_iterator() {
         List<Integer> list = Arrays.asList(1, 2, 3, 4, 5, 6);
-        assertEquals(makeSet(toList(permutationIterator(list))), permutations(list));
+        Set<List<Integer>> set = StreamSupport.stream(IterTools.permutations(6).spliterator(), false).collect(Collectors.toSet());
+        assertEquals(set, permutations(list));
     }
 
     @Test
