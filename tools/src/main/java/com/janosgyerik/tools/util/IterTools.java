@@ -64,11 +64,7 @@ public final class IterTools {
         }
 
         private int[] createInitialIndexes() {
-            int[] indexes = new int[size];
-            for (int i = 0; i < indexes.length; ++i) {
-                indexes[i] = i;
-            }
-            return indexes;
+            return IntStream.range(0, size).toArray();
         }
 
         @Override
