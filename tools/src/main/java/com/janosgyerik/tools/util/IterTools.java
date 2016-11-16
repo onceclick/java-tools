@@ -45,7 +45,7 @@ public final class IterTools {
 
     public static Iterable<List<Integer>> permutations(int n) {
         List<Integer> nums = IntStream.rangeClosed(1, n).boxed().collect(Collectors.toList());
-        return () -> permutationIterator(nums);
+        return () -> new PermutationIterator<>(nums);
     }
 
     private static class PermutationIterator<T> implements Iterator<List<T>> {
@@ -78,6 +78,9 @@ public final class IterTools {
 
         @Override
         public List<T> next() {
+            if (!hasNext()) {
+                throw new NoSuchElementException();
+            }
             List<T> current = new ArrayList<>(size);
             for (int index : indexes) {
                 current.add(list.get(index));
@@ -117,10 +120,6 @@ public final class IterTools {
             indexes[i] = indexes[j];
             indexes[j] = tmp;
         }
-    }
-
-    public static <T> Iterator<List<T>> permutationIterator(List<T> list) {
-        return new PermutationIterator<>(list);
     }
 
     private static int factorial(int n) {
