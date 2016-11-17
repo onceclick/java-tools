@@ -41,6 +41,9 @@ public final class Iterators {
 
         @Override
         public T next() {
+            if (!hasNext()) {
+                throw new NoSuchElementException();
+            }
             TreeNode<T> node = stack.pop();
             if (node.right != null) {
                 stack.push(node.right);
@@ -59,7 +62,8 @@ public final class Iterators {
             moveToLeftMost(root);
         }
 
-        private void moveToLeftMost(TreeNode<T> node) {
+        private void moveToLeftMost(TreeNode<T> start) {
+            TreeNode<T> node = start;
             while (node != null) {
                 stack.push(node);
                 node = node.left;
@@ -73,6 +77,9 @@ public final class Iterators {
 
         @Override
         public T next() {
+            if (!hasNext()) {
+                throw new NoSuchElementException();
+            }
             TreeNode<T> current = stack.pop();
             moveToLeftMost(current.right);
             return current.value;
@@ -86,7 +93,8 @@ public final class Iterators {
             moveToNextLeaf(root);
         }
 
-        private void moveToNextLeaf(TreeNode<T> node) {
+        private void moveToNextLeaf(TreeNode<T> start) {
+            TreeNode<T> node = start;
             while (node != null) {
                 stack.push(node);
                 node = node.left != null ? node.left : node.right;
@@ -100,6 +108,9 @@ public final class Iterators {
 
         @Override
         public T next() {
+            if (!hasNext()) {
+                throw new NoSuchElementException();
+            }
             TreeNode<T> current = stack.pop();
             if (!stack.isEmpty()) {
                 TreeNode<T> parent = stack.peek();
@@ -125,6 +136,9 @@ public final class Iterators {
 
         @Override
         public T next() {
+            if (!hasNext()) {
+                throw new NoSuchElementException();
+            }
             TreeNode<T> current = queue.poll();
 
             if (current.left != null) {
