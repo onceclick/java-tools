@@ -71,29 +71,29 @@ public class IterToolsTest {
     @Test
     public void should_get_1_permutation_for_singleton_list() {
         Set<List<Integer>> permutations = IterTools.permutations(Collections.singletonList(7));
-        assertEquals(Collections.singletonList(Collections.singletonList(7)), permutations);
+        assertThat(permutations).containsOnly(Collections.singletonList(7));
     }
 
     @Test
     public void should_get_2_ordered_permutations_for_x_y() {
         Set<List<Character>> permutations = IterTools.permutations(Arrays.asList('x', 'y'));
-        assertEquals(Arrays.asList(
+        assertThat(permutations).containsExactly(
                 Arrays.asList('x', 'y'),
                 Arrays.asList('y', 'x')
-        ), permutations);
+        );
     }
 
     @Test
     public void should_get_6_ordered_permutations_for_1_2_3() {
         Set<List<Integer>> permutations = IterTools.permutations(Arrays.asList(1, 2, 3));
-        assertEquals(Arrays.asList(
+        assertThat(permutations).containsOnly(
                 Arrays.asList(1, 2, 3),
                 Arrays.asList(1, 3, 2),
                 Arrays.asList(2, 1, 3),
                 Arrays.asList(2, 3, 1),
                 Arrays.asList(3, 1, 2),
                 Arrays.asList(3, 2, 1)
-        ), permutations);
+        );
     }
 
     @Test
