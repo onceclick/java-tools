@@ -22,13 +22,11 @@ public class CsvParser {
 
         public <T> List<T> parseLines(RowMapper<T> mapper) throws IOException {
             List<T> lines = new ArrayList<>();
-            {
-                String line;
-                while ((line = nextLine()) != null) {
-                    String[] cols = pattern.split(line.trim());
-                    if (mapper.isValidRow(cols)) {
-                        lines.add(mapper.mapRow(cols));
-                    }
+            String line;
+            while ((line = nextLine()) != null) {
+                String[] cols = pattern.split(line.trim());
+                if (mapper.isValidRow(cols)) {
+                    lines.add(mapper.mapRow(cols));
                 }
             }
             return lines;
