@@ -122,9 +122,7 @@ public final class IterTools {
     }
 
     public static <T> void toList(Iterator<T> iterator, List<T> list) {
-        while (iterator.hasNext()) {
-            list.add(iterator.next());
-        }
+        iterator.forEachRemaining(list::add);
     }
 
     public static <T> Set<List<T>> toSet(Iterable<List<T>> permutations) {
