@@ -19,7 +19,7 @@ public final class IterTools {
      * Note that there are n! permutations, where n is the size of the list.
      *
      * @param list items to permutate
-     * @param <T> type of list items
+     * @param <T>  type of list items
      * @return iterable of all permutations
      */
     public static <T> Iterable<List<T>> permutations(List<T> list) {
@@ -116,9 +116,9 @@ public final class IterTools {
     }
 
     public static <T> List<T> toList(Iterator<T> iterator) {
-        List<T> list = new ArrayList<>();
-        toList(iterator, list);
-        return list;
+        return StreamSupport
+                .stream(Spliterators.spliteratorUnknownSize(iterator, Spliterator.ORDERED), false)
+                .collect(Collectors.toCollection(ArrayList::new));
     }
 
     public static <T> void toList(Iterator<T> iterator, List<T> list) {
