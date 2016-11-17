@@ -3,7 +3,6 @@ package com.janosgyerik.tools.files.csv.reading;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.NoSuchElementException;
 import java.util.Scanner;
 import java.util.regex.Pattern;
 
@@ -47,11 +46,10 @@ public class CsvParser {
 
         @Override
         String nextLine() {
-            try {
+            if (scanner.hasNextLine()) {
                 return scanner.nextLine();
-            } catch (NoSuchElementException e) {
-                return null;
             }
+            return null;
         }
     }
 

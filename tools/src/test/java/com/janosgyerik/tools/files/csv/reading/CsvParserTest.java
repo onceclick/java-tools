@@ -1,7 +1,5 @@
 package com.janosgyerik.tools.files.csv.reading;
 
-import com.janosgyerik.tools.files.csv.reading.CsvParser;
-import com.janosgyerik.tools.files.csv.reading.RowMapper;
 import org.junit.Test;
 
 import java.io.IOException;
