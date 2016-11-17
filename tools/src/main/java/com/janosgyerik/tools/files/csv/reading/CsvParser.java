@@ -10,7 +10,7 @@ public class CsvParser {
 
     private static final String DEFAULT_SEPARATOR = ",";
 
-    private static abstract class AbstractCsvParser {
+    private abstract static class AbstractCsvParser {
 
         private final Pattern pattern;
 
