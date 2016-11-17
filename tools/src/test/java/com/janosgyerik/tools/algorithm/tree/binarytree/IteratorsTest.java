@@ -2,11 +2,9 @@ package com.janosgyerik.tools.algorithm.tree.binarytree;
 
 import org.junit.Test;
 
-import java.util.Arrays;
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
+import static com.janosgyerik.tools.algorithm.tree.binarytree.Iterators.*;
 import static org.junit.Assert.*;
 
 public class IteratorsTest {
@@ -41,26 +39,54 @@ public class IteratorsTest {
     }
 
     @Test
-    public void testPreOrderIterator() {
-        Iterator<Character> iterator = Iterators.preOrderIterator(root);
+    public void test_preOrderIterator() {
+        Iterator<Character> iterator = preOrderIterator(root);
         assertEquals(Arrays.asList('F', 'B', 'A', 'D', 'C', 'E', 'G', 'I', 'H'), iterateToList(iterator));
     }
 
+    @Test(expected = NoSuchElementException.class)
+    public void preOrderIterator_should_throw_if_iterated_beyond() {
+        Iterator<Character> iterator = preOrderIterator(new TreeNode<>('A'));
+        iterator.next();
+        iterator.next();
+    }
+
     @Test
-    public void testInOrderIterator() {
-        Iterator<Character> iterator = Iterators.inOrderIterator(root);
+    public void test_inOrderIterator() {
+        Iterator<Character> iterator = inOrderIterator(root);
         assertEquals(Arrays.asList('A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I'), iterateToList(iterator));
     }
 
-    @Test
-    public void testPostOrderIterator() {
-        Iterator<Character> iterator = Iterators.postOrderIterator(root);
-        assertEquals(Arrays.asList('A', 'C', 'E', 'D', 'B', 'H', 'I', 'G', 'F'), iterateToList(iterator));
+    @Test(expected = NoSuchElementException.class)
+    public void inOrderIterator_should_throw_if_iterated_beyond() {
+        Iterator<Character> iterator = inOrderIterator(new TreeNode<>('A'));
+        iterator.next();
+        iterator.next();
     }
 
     @Test
-    public void testLevelOrderIterator() {
-        Iterator<Character> iterator = Iterators.levelOrderIterator(root);
+    public void test_postOrderIterator() {
+        Iterator<Character> iterator = postOrderIterator(root);
+        assertEquals(Arrays.asList('A', 'C', 'E', 'D', 'B', 'H', 'I', 'G', 'F'), iterateToList(iterator));
+    }
+
+    @Test(expected = NoSuchElementException.class)
+    public void postOrderIterator_should_throw_if_iterated_beyond() {
+        Iterator<Character> iterator = postOrderIterator(new TreeNode<>('A'));
+        iterator.next();
+        iterator.next();
+    }
+
+    @Test
+    public void test_levelOrderIterator() {
+        Iterator<Character> iterator = levelOrderIterator(root);
         assertEquals(Arrays.asList('F', 'B', 'G', 'A', 'D', 'I', 'C', 'E', 'H'), iterateToList(iterator));
+    }
+
+    @Test(expected = NoSuchElementException.class)
+    public void levelOrderIterator_should_throw_if_iterated_beyond() {
+        Iterator<Character> iterator = levelOrderIterator(new TreeNode<>('A'));
+        iterator.next();
+        iterator.next();
     }
 }
