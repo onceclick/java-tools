@@ -12,13 +12,13 @@ import static org.junit.Assert.assertEquals;
 
 public class IterToolsTest {
 
-    private Set<List<Integer>> permutations(List<Integer> integers) {
-        return IterTools.permutations(integers);
+    private <T> Set<List<T>> permutations(List<T> nums) {
+        return IterTools.toSet(IterTools.permutations(nums));
     }
 
     @Test
     public void test_permutate_empty() {
-        assertEquals(Collections.<List<Integer>>emptySet(), permutations(Collections.emptyList()));
+        assertEquals(Collections.singleton(Collections.emptyList()), permutations(Collections.emptyList()));
     }
 
     @Test
@@ -70,22 +70,22 @@ public class IterToolsTest {
 
     @Test
     public void should_get_1_permutation_for_singleton_list() {
-        Set<List<Integer>> permutations = IterTools.permutations(Collections.singletonList(7));
+        Set<List<Integer>> permutations = permutations(Collections.singletonList(7));
         assertThat(permutations).containsOnly(Collections.singletonList(7));
     }
 
     @Test
-    public void should_get_2_ordered_permutations_for_x_y() {
-        Set<List<Character>> permutations = IterTools.permutations(Arrays.asList('x', 'y'));
-        assertThat(permutations).containsExactly(
+    public void should_get_2_permutations_for_x_y() {
+        Set<List<Character>> permutations = permutations(Arrays.asList('x', 'y'));
+        assertThat(permutations).containsOnly(
                 Arrays.asList('x', 'y'),
                 Arrays.asList('y', 'x')
         );
     }
 
     @Test
-    public void should_get_6_ordered_permutations_for_1_2_3() {
-        Set<List<Integer>> permutations = IterTools.permutations(Arrays.asList(1, 2, 3));
+    public void should_get_6_permutations_for_1_2_3() {
+        Set<List<Integer>> permutations = permutations(Arrays.asList(1, 2, 3));
         assertThat(permutations).containsOnly(
                 Arrays.asList(1, 2, 3),
                 Arrays.asList(1, 3, 2),
@@ -101,17 +101,5 @@ public class IterToolsTest {
         List<Integer> list = Arrays.asList(1, 2, 3, 4, 5, 6);
         Set<List<Integer>> set = StreamSupport.stream(IterTools.permutations(6).spliterator(), false).collect(Collectors.toSet());
         assertEquals(set, permutations(list));
-    }
-
-    @Test
-    public void test_permutations() {
-        assertThat(IterTools.permutations(3)).containsExactly(
-                Arrays.asList(1, 2, 3),
-                Arrays.asList(1, 3, 2),
-                Arrays.asList(2, 1, 3),
-                Arrays.asList(2, 3, 1),
-                Arrays.asList(3, 1, 2),
-                Arrays.asList(3, 2, 1)
-        );
     }
 }

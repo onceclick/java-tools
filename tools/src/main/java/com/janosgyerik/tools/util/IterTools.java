@@ -3,6 +3,7 @@ package com.janosgyerik.tools.util;
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+import java.util.stream.StreamSupport;
 
 public final class IterTools {
 
@@ -10,42 +11,13 @@ public final class IterTools {
         throw new AssertionError("utility class, forbidden constructor");
     }
 
-    private static class PermutationHelper<T> {
-        private final List<T> list;
-        private final List<T> choices;
-
-        PermutationHelper(List<T> list, List<T> choices) {
-            this.list = list;
-            this.choices = choices;
-        }
-    }
-
-    public static <T> Set<List<T>> permutations(Collection<T> collection) {
-        Set<List<T>> result = new LinkedHashSet<>();
-
-        Queue<PermutationHelper<T>> queue = new LinkedList<>();
-        queue.add(new PermutationHelper<>(new LinkedList<>(), new LinkedList<>(collection)));
-
-        while (!queue.isEmpty()) {
-            PermutationHelper<T> helper = queue.poll();
-            for (T candidate : helper.choices) {
-                List<T> newList = new LinkedList<>(helper.list);
-                List<T> newChoices = new LinkedList<>(helper.choices);
-                newChoices.remove(candidate);
-                newList.add(candidate);
-                if (newList.size() == collection.size()) {
-                    result.add(newList);
-                } else {
-                    queue.add(new PermutationHelper<>(newList, newChoices));
-                }
-            }
-        }
-        return result;
+    public static <T> Iterable<List<T>> permutations(List<T> list) {
+        return () -> new PermutationIterator<>(list);
     }
 
     public static Iterable<List<Integer>> permutations(int n) {
         List<Integer> nums = IntStream.rangeClosed(1, n).boxed().collect(Collectors.toList());
-        return () -> new PermutationIterator<>(nums);
+        return permutations(nums);
     }
 
     private static class PermutationIterator<T> implements Iterator<List<T>> {
@@ -59,7 +31,8 @@ public final class IterTools {
         PermutationIterator(List<T> list) {
             this.list = list;
             this.size = list.size();
-            maxCount = factorial(size);
+            int factorial = factorial(size);
+            maxCount = factorial >= size ? factorial : Integer.MAX_VALUE;
             indexes = createInitialIndexes();
         }
 
@@ -135,5 +108,9 @@ public final class IterTools {
         while (iterator.hasNext()) {
             list.add(iterator.next());
         }
+    }
+
+    public static <T> Set<List<T>> toSet(Iterable<List<T>> permutations) {
+        return StreamSupport.stream(permutations.spliterator(), false).collect(Collectors.toSet());
     }
 }

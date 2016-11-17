@@ -112,7 +112,7 @@ public abstract class SortTest {
 
     @Test
     public void test_permutations_1_2_3_4_5_6_7_8() {
-        Set<List<Integer>> permutations = IterTools.permutations(Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8));
+        Set<List<Integer>> permutations = IterTools.toSet(IterTools.permutations(Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8)));
         for (List<Integer> combo : permutations) {
             sortAndVerify(toArrary(combo));
         }
