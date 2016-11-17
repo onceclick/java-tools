@@ -2,12 +2,20 @@ package com.janosgyerik.tools.util;
 
 import java.util.Arrays;
 
+/**
+ * Utility class to work with matrices
+ */
 public class MatrixUtils {
 
     private MatrixUtils() {
         // utility class, forbidden constructor
     }
 
+    /**
+     * Format matrix as String, by joining Arrays.toString of each row
+     * @param matrix the matrix to format
+     * @return the matrix String
+     */
     public static String toString(int[][] matrix) {
         StringBuilder builder = new StringBuilder();
         builder.append("[");

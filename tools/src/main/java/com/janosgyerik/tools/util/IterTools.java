@@ -1,6 +1,9 @@
 package com.janosgyerik.tools.util;
 
 import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+import java.util.stream.StreamSupport;
 
 public final class IterTools {
 
@@ -8,102 +11,84 @@ public final class IterTools {
         throw new AssertionError("utility class, forbidden constructor");
     }
 
-    private static class PermutationHelper<T> {
+    public static <T> Iterable<List<T>> permutations(List<T> list) {
+        return () -> new PermutationIterator<>(list);
+    }
+
+    public static Iterable<List<Integer>> permutations(int n) {
+        List<Integer> nums = IntStream.rangeClosed(1, n).boxed().collect(Collectors.toList());
+        return permutations(nums);
+    }
+
+    private static class PermutationIterator<T> implements Iterator<List<T>> {
         private final List<T> list;
-        private final List<T> choices;
+        private final int size;
+        private final int maxCount;
+        private final int[] indexes;
 
-        PermutationHelper(List<T> list, List<T> choices) {
+        int count = 0;
+
+        PermutationIterator(List<T> list) {
             this.list = list;
-            this.choices = choices;
+            this.size = list.size();
+            int factorial = factorial(size);
+            maxCount = factorial >= size ? factorial : Integer.MAX_VALUE;
+            indexes = createInitialIndexes();
         }
-    }
 
-    public static <T> Set<List<T>> permutations(Collection<T> collection) {
-        Set<List<T>> result = new LinkedHashSet<>();
+        private int[] createInitialIndexes() {
+            return IntStream.range(0, size).toArray();
+        }
 
-        Queue<PermutationHelper<T>> queue = new LinkedList<>();
-        queue.add(new PermutationHelper<>(new LinkedList<>(), new LinkedList<>(collection)));
+        @Override
+        public boolean hasNext() {
+            return count < maxCount;
+        }
 
-        while (!queue.isEmpty()) {
-            PermutationHelper<T> helper = queue.poll();
-            for (T candidate : helper.choices) {
-                List<T> newList = new LinkedList<>(helper.list);
-                List<T> newChoices = new LinkedList<>(helper.choices);
-                newChoices.remove(candidate);
-                newList.add(candidate);
-                if (newList.size() == collection.size()) {
-                    result.add(newList);
-                } else {
-                    queue.add(new PermutationHelper<>(newList, newChoices));
+        @Override
+        public List<T> next() {
+            if (!hasNext()) {
+                throw new NoSuchElementException();
+            }
+            List<T> current = new ArrayList<>(size);
+            for (int index : indexes) {
+                current.add(list.get(index));
+            }
+
+            if (++count < maxCount) {
+                updateIndexes();
+            }
+
+            return current;
+        }
+
+        private void updateIndexes() {
+            int i = indexes.length - 2;
+            for (; i >= 0; --i) {
+                if (indexes[i] < indexes[i + 1]) {
+                    break;
                 }
+            }
+            int j = indexes.length - 1;
+            for (; ; j--) {
+                if (indexes[j] > indexes[i]) {
+                    break;
+                }
+            }
+
+            swap(i, j);
+
+            int half = (indexes.length - i) / 2;
+            for (int k = 1; k <= half; ++k) {
+                swap(i + k, indexes.length - k);
             }
         }
-        return result;
-    }
 
-    public static <T> Iterator<List<T>> permutationIterator(List<T> list) {
-        int size = list.size();
-        int maxCount = factorial(size);
-
-        return new Iterator<List<T>>() {
-            int count = 0;
-            int[] indexes = createInitialIndexes();
-
-            private int[] createInitialIndexes() {
-                int[] indexes = new int[size];
-                for (int i = 0; i < indexes.length; ++i) {
-                    indexes[i] = i;
-                }
-                return indexes;
-            }
-
-            @Override
-            public boolean hasNext() {
-                return count < maxCount;
-            }
-
-            @Override
-            public List<T> next() {
-                List<T> current = new ArrayList<>(size);
-                for (int index : indexes) {
-                    current.add(list.get(index));
-                }
-
-                if (++count < maxCount) {
-                    updateIndexes();
-                }
-
-                return current;
-            }
-
-            private void updateIndexes() {
-                int i = indexes.length - 2;
-                for (; i >= 0; --i) {
-                    if (indexes[i] < indexes[i + 1]) {
-                        break;
-                    }
-                }
-                int j = indexes.length - 1;
-                for (;; j--) {
-                    if (indexes[j] > indexes[i]) {
-                        break;
-                    }
-                }
-
-                swap(i, j);
-
-                int half = (indexes.length - i) / 2;
-                for (int k = 1; k <= half; ++k) {
-                    swap(i + k, indexes.length - k);
-                }
-            }
-
-            private void swap(int i, int j) {
-                int tmp = indexes[i];
-                indexes[i] = indexes[j];
-                indexes[j] = tmp;
-            }
-        };
+        private void swap(int i, int j) {
+            int tmp = indexes[i];
+            indexes[i] = indexes[j];
+            indexes[j] = tmp;
+        }
     }
 
     private static int factorial(int n) {
@@ -123,5 +108,9 @@ public final class IterTools {
         while (iterator.hasNext()) {
             list.add(iterator.next());
         }
+    }
+
+    public static <T> Set<List<T>> toSet(Iterable<List<T>> permutations) {
+        return StreamSupport.stream(permutations.spliterator(), false).collect(Collectors.toSet());
     }
 }
