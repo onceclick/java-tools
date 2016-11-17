@@ -64,8 +64,8 @@ public class IterToolsTest {
 
     @Test
     public void should_get_1_empty_permutation_for_empty_list() {
-        Set<List<Integer>> permutations = IterTools.permutations(Collections.emptyList());
-        assertEquals(Collections.singletonList(Collections.emptyList()), permutations);
+        Iterable<List<Integer>> permutations = IterTools.permutations(0);
+        assertThat(permutations).containsOnly(Collections.emptyList());
     }
 
     @Test
