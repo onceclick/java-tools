@@ -115,17 +115,38 @@ public final class IterTools {
         return n * factorial(n - 1);
     }
 
+    /**
+     * Convert an iterator to list.
+     *
+     * @param iterator the iterator to convert
+     * @param <T>      type of the elements in the iterator
+     * @return list of values from the iterator
+     */
     public static <T> List<T> toList(Iterator<T> iterator) {
         return StreamSupport
                 .stream(Spliterators.spliteratorUnknownSize(iterator, Spliterator.ORDERED), false)
                 .collect(Collectors.toCollection(ArrayList::new));
     }
 
+    /**
+     * Convert an iterator to a list, by iterating into (appending to) the given list.
+     *
+     * @param iterator the iterator to convert
+     * @param list     the list to iterate (append) into
+     * @param <T>      type of the elements in the iterator
+     */
     public static <T> void toList(Iterator<T> iterator, List<T> list) {
         iterator.forEachRemaining(list::add);
     }
 
-    public static <T> Set<List<T>> toSet(Iterable<List<T>> permutations) {
-        return StreamSupport.stream(permutations.spliterator(), false).collect(Collectors.toSet());
+    /**
+     * Convert an iterable to a set.
+     *
+     * @param iterable the iterable to convert
+     * @param <T>      type of the elements in the iterable
+     * @return set of values from the iterable
+     */
+    public static <T> Set<List<T>> toSet(Iterable<List<T>> iterable) {
+        return StreamSupport.stream(iterable.spliterator(), false).collect(Collectors.toSet());
     }
 }
