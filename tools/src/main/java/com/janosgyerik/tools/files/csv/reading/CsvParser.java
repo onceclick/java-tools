@@ -1,6 +1,7 @@
 package com.janosgyerik.tools.files.csv.reading;
 
-import java.io.*;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -20,10 +21,12 @@ public class CsvParser {
 
         abstract String nextLine() throws IOException;
 
+        abstract boolean hasNextLine() throws IOException;
+
         public <T> List<T> parseLines(RowMapper<T> mapper) throws IOException {
             List<T> lines = new ArrayList<>();
-            String line;
-            while ((line = nextLine()) != null) {
+            while (hasNextLine()) {
+                String line = nextLine();
                 String[] cols = pattern.split(line.trim());
                 if (mapper.isValidRow(cols)) {
                     lines.add(mapper.mapRow(cols));
@@ -43,30 +46,13 @@ public class CsvParser {
         }
 
         @Override
-        String nextLine() {
-            if (scanner.hasNextLine()) {
-                return scanner.nextLine();
-            }
-            return null;
-        }
-    }
-
-    private static class FileCsvParser extends AbstractCsvParser {
-
-        private final BufferedReader reader;
-
-        private FileCsvParser(File file, String separator) throws FileNotFoundException {
-            super(separator);
-            reader = new BufferedReader(new FileReader(file));
+        boolean hasNextLine() throws IOException {
+            return scanner.hasNextLine();
         }
 
         @Override
-        String nextLine() throws IOException {
-            String line = reader.readLine();
-            if (line == null) {
-                reader.close();
-            }
-            return line;
+        String nextLine() {
+            return scanner.nextLine();
         }
     }
 
@@ -87,7 +73,7 @@ public class CsvParser {
     }
 
     public static <T> List<T> objectsFromFile(File file, String separator, RowMapper<T> mapper) throws IOException {
-        return new FileCsvParser(file, separator).parseLines(mapper);
+        return new ScannerCsvParser(new Scanner(file), separator).parseLines(mapper);
     }
 
     public static <T> List<T> objectsFromScanner(Scanner scanner, RowMapper<T> mapper) throws IOException {
