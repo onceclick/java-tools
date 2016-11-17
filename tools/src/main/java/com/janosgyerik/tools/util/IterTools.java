@@ -5,16 +5,33 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.StreamSupport;
 
+/**
+ * Utility methods related to iterators.
+ */
 public final class IterTools {
 
     private IterTools() {
         throw new AssertionError("utility class, forbidden constructor");
     }
 
+    /**
+     * Return an iterable over all permutations of a list's elements.
+     * Note that there are n! permutations, where n is the size of the list.
+     *
+     * @param list items to permutate
+     * @param <T> type of list items
+     * @return iterable of all permutations
+     */
     public static <T> Iterable<List<T>> permutations(List<T> list) {
         return () -> new PermutationIterator<>(list);
     }
 
+    /**
+     * Return an iterable over all permutations of the numbers 1..n.
+     *
+     * @param n the upper bound of the range of values to use
+     * @return iterable of all permutations
+     */
     public static Iterable<List<Integer>> permutations(int n) {
         List<Integer> nums = IntStream.rangeClosed(1, n).boxed().collect(Collectors.toList());
         return permutations(nums);
