@@ -20,7 +20,7 @@ public final class ClassPathUtils {
         try {
             return getJarUrl(Class.forName(className));
         } catch (ClassNotFoundException e) {
-            return null;
+            throw new IllegalArgumentException("class not found: " + className, e);
         }
     }
 
