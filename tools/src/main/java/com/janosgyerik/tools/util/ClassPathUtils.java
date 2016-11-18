@@ -16,17 +16,16 @@ public final class ClassPathUtils {
         return clazz.getProtectionDomain().getCodeSource().getLocation();
     }
 
-    public static URL getClassUrl(Class<?> clazz) {
-        return clazz.getResource("/" + clazz.getName().replace(".", "/") + ".class");
-    }
-
     public static URL getJarUrl(String className) {
         try {
-            Class<?> clazz = Class.forName(className);
-            return clazz.getProtectionDomain().getCodeSource().getLocation();
+            return getJarUrl(Class.forName(className));
         } catch (ClassNotFoundException e) {
             return null;
         }
+    }
+
+    public static URL getClassUrl(Class<?> clazz) {
+        return clazz.getResource("/" + clazz.getName().replace(".", "/") + ".class");
     }
 
 }
