@@ -1,6 +1,5 @@
 package com.janosgyerik.tools.util;
 
-import com.janosgyerik.tools.util.DateUtils;
 import org.junit.Test;
 
 import java.util.Calendar;
@@ -34,31 +33,31 @@ public class DateUtilsTest {
     @Test
     public void test_getMonthShortName() {
         Date date = DateUtils.create(2014, 12, 3);
-        assertEquals("Dec", DateUtils.getMonthShortName(date));
+        assertEquals("Dec", DateUtils.shortMonthName(date));
     }
 
     @Test
     public void test_getMonthLongName() {
         Date date = DateUtils.create(2014, 12, 3);
-        assertEquals("December", DateUtils.getMonthLongName(date));
+        assertEquals("December", DateUtils.longMonthName(date));
     }
 
     @Test
     public void test_getDayShortName() {
         Date date = DateUtils.create(2014, 12, 3);
-        assertEquals("Wed", DateUtils.getDayShortName(date));
+        assertEquals("Wed", DateUtils.shortDayName(date));
     }
 
     @Test
     public void test_getDayLongName() {
         Date date = DateUtils.create(2014, 12, 3);
-        assertEquals("Wednesday", DateUtils.getDayLongName(date));
+        assertEquals("Wednesday", DateUtils.longDayName(date));
     }
 
     @Test
     public void test_truncate() {
         Calendar calendar = Calendar.getInstance();
-        calendar.setTime(DateUtils.truncate(new Date()));
+        calendar.setTime(DateUtils.truncated(new Date()));
         assertEquals(0, calendar.get(Calendar.SECOND));
         assertEquals(0, calendar.get(Calendar.MINUTE));
         assertEquals(0, calendar.get(Calendar.HOUR));

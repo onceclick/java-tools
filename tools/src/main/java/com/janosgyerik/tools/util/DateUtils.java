@@ -58,23 +58,7 @@ public final class DateUtils {
         }
     }
 
-    public static String getMonthShortName(Date date) {
-        return new SimpleDateFormat("MMM").format(date);
-    }
-
-    public static String getMonthLongName(Date date) {
-        return new SimpleDateFormat("MMMMM").format(date);
-    }
-
-    public static String getDayShortName(Date date) {
-        return new SimpleDateFormat("E").format(date);
-    }
-
-    public static String getDayLongName(Date date) {
-        return new SimpleDateFormat("EEEEE").format(date);
-    }
-
-    public static Date truncate(Date date) {
+    public static Date truncated(Date date) {
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(date);
         calendar.set(Calendar.HOUR_OF_DAY, 0);
@@ -85,6 +69,22 @@ public final class DateUtils {
     }
 
     public static Date today() {
-        return truncate(new Date());
+        return truncated(new Date());
+    }
+
+    public static String shortMonthName(Date date) {
+        return new SimpleDateFormat("MMM").format(date);
+    }
+
+    public static String longMonthName(Date date) {
+        return new SimpleDateFormat("MMMMM").format(date);
+    }
+
+    public static String shortDayName(Date date) {
+        return new SimpleDateFormat("E").format(date);
+    }
+
+    public static String longDayName(Date date) {
+        return new SimpleDateFormat("EEEEE").format(date);
     }
 }
