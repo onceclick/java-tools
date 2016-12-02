@@ -1,6 +1,5 @@
 package com.janosgyerik.utils.objectstore.api;
 
-import java.io.IOException;
 import java.util.Optional;
 
 /**
@@ -11,7 +10,7 @@ import java.util.Optional;
  */
 public interface ObjectStore<K, V> {
 
-    void write(K key, V value) throws StoreWriteException;
+    void write(K key, V value);
 
-    Optional<V> read(K key) throws StoreReadException;
+    Optional<V> read(K key);
 }
