@@ -5,6 +5,7 @@ import org.junit.Test;
 import java.util.*;
 
 import static com.janosgyerik.utils.misc.IterTools.permutations;
+import static com.janosgyerik.utils.misc.IterTools.toList;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class IterToolsTest {
@@ -50,5 +51,19 @@ public class IterToolsTest {
             iterator.next();
         }
         iterator.next();
+    }
+
+    @Test
+    public void should_get_equal_list_from_toList_iterator() {
+        List<Integer> nums = Arrays.asList(1, 2, 3);
+        assertThat(toList(nums.iterator())).isEqualTo(nums);
+    }
+
+    @Test
+    public void should_get_equal_list_from_toList_iterator_into_list() {
+        List<Integer> nums = Arrays.asList(1, 2, 3);
+        List<Integer> other = new ArrayList<>();
+        toList(nums.iterator(), other);
+        assertThat(other).isEqualTo(nums);
     }
 }
