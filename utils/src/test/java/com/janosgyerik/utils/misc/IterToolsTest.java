@@ -2,9 +2,7 @@ package com.janosgyerik.utils.misc;
 
 import org.junit.Test;
 
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 import static com.janosgyerik.utils.misc.IterTools.permutations;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -43,5 +41,14 @@ public class IterToolsTest {
             Arrays.asList(3, 1, 2),
             Arrays.asList(3, 2, 1)
         ));
+    }
+
+    @Test(expected = NoSuchElementException.class)
+    public void should_throw_exception_when_iterating_beyond_permutations() {
+        Iterator<List<Integer>> iterator = permutations(3).iterator();
+        while (iterator.hasNext()) {
+            iterator.next();
+        }
+        iterator.next();
     }
 }
