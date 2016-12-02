@@ -13,6 +13,7 @@ import org.junit.rules.TemporaryFolder;
 import java.io.IOException;
 import java.util.Optional;
 
+import static com.janosgyerik.demo.objectstore.ProtobufUtils.writer;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class ObjectStoreDemo {
@@ -22,8 +23,8 @@ public class ObjectStoreDemo {
     @Test
     public void test_1() throws IOException {
         CountingPathGenerator pathGenerator = new CountingPathGenerator(2, 2, folder.getRoot().toPath());
-        Reader<AddressBookProtos.Person> reader = AddressBookProtos.Person::parseFrom;
-        Writer<AddressBookProtos.Person> writer = (out, value) -> value.writeTo(out);
+        Reader<AddressBookProtos.Person> reader = ProtobufUtils.reader(AddressBookProtos.Person.parser());
+        Writer<AddressBookProtos.Person> writer = writer();
         ObjectStore<String, AddressBookProtos.Person> store = new SimpleObjectStore<>(pathGenerator, reader, writer);
 
         AddressBookProtos.Person.Builder builder = AddressBookProtos.Person.newBuilder();

@@ -1,8 +1,7 @@
 package com.janosgyerik.utils.objectstore.impl;
 
-import java.io.IOException;
 import java.io.InputStream;
+import java.util.function.Function;
 
-public interface Reader<V> {
-    V parseFrom(InputStream in) throws IOException;
+public interface Reader<V> extends Function<InputStream, V> {
 }

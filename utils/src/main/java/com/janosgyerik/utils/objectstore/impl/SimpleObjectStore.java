@@ -30,7 +30,7 @@ public class SimpleObjectStore<K, V> implements ObjectStore<K, V> {
     }
 
     @Override
-    public Optional<V> read(K key) throws StoreReadException {
+    public Optional<V> read(K key) {
         try {
             return internalRead(key);
         } catch (IOException e) {
@@ -44,12 +44,12 @@ public class SimpleObjectStore<K, V> implements ObjectStore<K, V> {
             return Optional.empty();
         }
         try (InputStream in = Files.newInputStream(path)) {
-            return Optional.of(reader.parseFrom(in));
+            return Optional.of(reader.apply(in));
         }
     }
 
     @Override
-    public void write(K key, V value) throws StoreWriteException {
+    public void write(K key, V value) {
         try {
             internalWrite(key, value);
         } catch (IOException e) {
@@ -69,7 +69,7 @@ public class SimpleObjectStore<K, V> implements ObjectStore<K, V> {
             }
         }
         try (OutputStream out = Files.newOutputStream(path)) {
-            writer.writeTo(out, value);
+            writer.accept(out, value);
         }
     }
 }

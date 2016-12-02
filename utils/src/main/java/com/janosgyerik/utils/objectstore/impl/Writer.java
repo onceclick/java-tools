@@ -1,8 +1,7 @@
 package com.janosgyerik.utils.objectstore.impl;
 
-import java.io.IOException;
 import java.io.OutputStream;
+import java.util.function.BiConsumer;
 
-public interface Writer<V> {
-    void writeTo(OutputStream out, V value) throws IOException;
+public interface Writer<V> extends BiConsumer<OutputStream, V> {
 }
