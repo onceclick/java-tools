@@ -1,5 +1,6 @@
 package com.janosgyerik.utils.objectstore;
 
+import com.janosgyerik.utils.objectstore.impl.CountingPathGenerator;
 import org.junit.Test;
 
 import java.nio.file.Paths;

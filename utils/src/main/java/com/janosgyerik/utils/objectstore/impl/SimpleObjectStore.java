@@ -1,4 +1,4 @@
-package com.janosgyerik.utils.objectstore;
+package com.janosgyerik.utils.objectstore.impl;
 
 import com.janosgyerik.utils.objectstore.api.ObjectStore;
 import com.janosgyerik.utils.objectstore.api.StoreReadException;

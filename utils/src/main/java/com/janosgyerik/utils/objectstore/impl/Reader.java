@@ -1,4 +1,4 @@
-package com.janosgyerik.utils.objectstore;
+package com.janosgyerik.utils.objectstore.impl;
 
 import java.io.IOException;
 import java.io.InputStream;
