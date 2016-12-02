@@ -146,7 +146,7 @@ public final class IterTools {
      * @param <T>      type of the elements in the iterable
      * @return set of values from the iterable
      */
-    public static <T> Set<List<T>> toSet(Iterable<List<T>> iterable) {
+    public static <T> Set<T> toSet(Iterable<T> iterable) {
         return StreamSupport.stream(iterable.spliterator(), false).collect(Collectors.toSet());
     }
 }

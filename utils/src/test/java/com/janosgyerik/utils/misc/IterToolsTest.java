@@ -6,6 +6,7 @@ import java.util.*;
 
 import static com.janosgyerik.utils.misc.IterTools.permutations;
 import static com.janosgyerik.utils.misc.IterTools.toList;
+import static com.janosgyerik.utils.misc.IterTools.toSet;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class IterToolsTest {
@@ -65,5 +66,12 @@ public class IterToolsTest {
         List<Integer> other = new ArrayList<>();
         toList(nums.iterator(), other);
         assertThat(other).isEqualTo(nums);
+    }
+
+    @Test
+    public void should_get_equal_set_from_toSet_iterator() {
+        List<Integer> nums = Arrays.asList(1, 2, 3, 2);
+        Set<Integer> numsSet = new HashSet<>(nums);
+        assertThat(toSet(nums)).isEqualTo(numsSet);
     }
 }
