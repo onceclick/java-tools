@@ -1,7 +1,7 @@
 package com.janosgyerik.demo.objectstore;
 
 import com.example.tutorial.AddressBookProtos;
-import com.janosgyerik.tools.objectstore.*;
+import com.janosgyerik.utils.objectstore.*;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;

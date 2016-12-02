@@ -1,11 +1,11 @@
 package com.janosgyerik.demo.csv.writing;
 
 import com.janosgyerik.demo.company.Person;
-import com.janosgyerik.tools.files.csv.writing.Columnizer;
-import com.janosgyerik.tools.files.csv.writing.CsvWriter;
-import com.janosgyerik.tools.files.csv.writing.CsvWriters;
-import com.janosgyerik.tools.files.csv.writing.ObjectWriter;
-import com.janosgyerik.tools.util.FileUtils;
+import com.janosgyerik.utils.files.csv.writing.Columnizer;
+import com.janosgyerik.utils.files.csv.writing.CsvWriter;
+import com.janosgyerik.utils.files.csv.writing.CsvWriters;
+import com.janosgyerik.utils.files.csv.writing.ObjectWriter;
+import com.janosgyerik.utils.misc.FileUtils;
 
 import java.io.File;
 import java.io.IOException;
