@@ -1,5 +1,9 @@
 package com.janosgyerik.utils.objectstore;
 
+import com.janosgyerik.utils.objectstore.api.ObjectStore;
+import com.janosgyerik.utils.objectstore.api.StoreReadException;
+import com.janosgyerik.utils.objectstore.api.StoreWriteException;
+
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
@@ -26,7 +30,15 @@ public class SimpleObjectStore<K, V> implements ObjectStore<K, V> {
     }
 
     @Override
-    public Optional<V> read(K key) throws IOException {
+    public Optional<V> read(K key) throws StoreReadException {
+        try {
+            return internalRead(key);
+        } catch (IOException e) {
+            throw new StoreReadException(e);
+        }
+    }
+
+    private Optional<V> internalRead(K key) throws IOException {
         Path path = index.get(key);
         if (path == null) {
             return Optional.empty();
@@ -37,7 +49,15 @@ public class SimpleObjectStore<K, V> implements ObjectStore<K, V> {
     }
 
     @Override
-    public void write(K key, V value) throws IOException {
+    public void write(K key, V value) throws StoreWriteException {
+        try {
+            internalWrite(key, value);
+        } catch (IOException e) {
+            throw new StoreWriteException(e);
+        }
+    }
+
+    private void internalWrite(K key, V value) throws IOException {
         Path path = index.get(key);
         if (path == null) {
             path = pathGenerator.next();

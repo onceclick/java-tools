@@ -2,6 +2,7 @@ package com.janosgyerik.demo.objectstore;
 
 import com.example.tutorial.AddressBookProtos;
 import com.janosgyerik.utils.objectstore.*;
+import com.janosgyerik.utils.objectstore.api.ObjectStore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
