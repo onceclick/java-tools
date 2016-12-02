@@ -35,19 +35,19 @@ public class IterToolsTest {
     @Test
     public void test_permutate_1_2() {
         assertEquals(
-                makeSet(Arrays.asList(Arrays.asList(1, 2), Arrays.asList(2, 1))),
-                permutations(Arrays.asList(1, 2)));
+            makeSet(Arrays.asList(Arrays.asList(1, 2), Arrays.asList(2, 1))),
+            permutations(Arrays.asList(1, 2)));
         assertEquals(
-                makeSet(Arrays.asList(Arrays.asList(2, 1), Arrays.asList(1, 2))),
-                permutations(Arrays.asList(1, 2)));
+            makeSet(Arrays.asList(Arrays.asList(2, 1), Arrays.asList(1, 2))),
+            permutations(Arrays.asList(1, 2)));
     }
 
     @Test
     public void test_permutate_1_2_3() {
         assertEquals(
-                makeSet(Arrays.asList(Arrays.asList(1, 2, 3), Arrays.asList(1, 3, 2), Arrays.asList(2, 1, 3),
-                        Arrays.asList(2, 3, 1), Arrays.asList(3, 1, 2), Arrays.asList(3, 2, 1))),
-                permutations(Arrays.asList(1, 2, 3)));
+            makeSet(Arrays.asList(Arrays.asList(1, 2, 3), Arrays.asList(1, 3, 2), Arrays.asList(2, 1, 3),
+                Arrays.asList(2, 3, 1), Arrays.asList(3, 1, 2), Arrays.asList(3, 2, 1))),
+            permutations(Arrays.asList(1, 2, 3)));
     }
 
     @Test
@@ -65,41 +65,42 @@ public class IterToolsTest {
     @Test
     public void should_get_1_empty_permutation_for_empty_list() {
         Iterable<List<Integer>> permutations = IterTools.permutations(0);
-        assertThat(permutations).containsOnly(Collections.emptyList());
+        assertThat(permutations).containsOnlyElementsOf(Collections.singleton(Collections.emptyList()));
     }
 
     @Test
     public void should_get_1_permutation_for_singleton_list() {
         Set<List<Integer>> permutations = permutations(Collections.singletonList(7));
-        assertThat(permutations).containsOnly(Collections.singletonList(7));
+        assertThat(permutations).containsOnlyElementsOf(Collections.singleton(Collections.singletonList(7)));
     }
 
     @Test
     public void should_get_2_permutations_for_x_y() {
         Set<List<Character>> permutations = permutations(Arrays.asList('x', 'y'));
-        assertThat(permutations).containsOnly(
-                Arrays.asList('x', 'y'),
-                Arrays.asList('y', 'x')
-        );
+        assertThat(permutations).containsOnlyElementsOf(Arrays.asList(
+            Arrays.asList('x', 'y'),
+            Arrays.asList('y', 'x')
+        ));
     }
 
     @Test
     public void should_get_6_permutations_for_1_2_3() {
         Set<List<Integer>> permutations = permutations(Arrays.asList(1, 2, 3));
-        assertThat(permutations).containsOnly(
-                Arrays.asList(1, 2, 3),
-                Arrays.asList(1, 3, 2),
-                Arrays.asList(2, 1, 3),
-                Arrays.asList(2, 3, 1),
-                Arrays.asList(3, 1, 2),
-                Arrays.asList(3, 2, 1)
-        );
+        assertThat(permutations).containsOnlyElementsOf(Arrays.asList(
+            Arrays.asList(1, 2, 3),
+            Arrays.asList(1, 3, 2),
+            Arrays.asList(2, 1, 3),
+            Arrays.asList(2, 3, 1),
+            Arrays.asList(3, 1, 2),
+            Arrays.asList(3, 2, 1)
+        ));
     }
 
     @Test
     public void should_get_equal_permutations_from_recursion_and_iterator() {
         List<Integer> list = Arrays.asList(1, 2, 3, 4, 5, 6);
-        Set<List<Integer>> set = StreamSupport.stream(IterTools.permutations(6).spliterator(), false).collect(Collectors.toSet());
+        Iterable<List<Integer>> permutations = IterTools.permutations(6);
+        Set<List<Integer>> set = StreamSupport.stream(permutations.spliterator(), false).collect(Collectors.toSet());
         assertEquals(set, permutations(list));
     }
 }
