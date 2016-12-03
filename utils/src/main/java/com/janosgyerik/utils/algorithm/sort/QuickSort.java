@@ -1,6 +1,11 @@
 package com.janosgyerik.utils.algorithm.sort;
 
 public class QuickSort {
+
+    private QuickSort() {
+        // utility class, forbidden constructor
+    }
+
     public static void sort(int[] arr) {
         sort(arr, 0, arr.length);
     }

@@ -7,6 +7,10 @@ import java.util.List;
 
 public class RadixSortWithBitShifting {
 
+    private RadixSortWithBitShifting() {
+        // utility class, forbidden constructor
+    }
+
     public static final int DEFAULT_RADIX = 8;
 
     public static void sort(int[] arr) {

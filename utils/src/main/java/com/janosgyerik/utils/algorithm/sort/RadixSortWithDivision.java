@@ -7,6 +7,10 @@ import java.util.List;
 
 public class RadixSortWithDivision {
 
+    private RadixSortWithDivision() {
+        // utility class, forbidden constructor
+    }
+
     public static final int DEFAULT_RADIX = 10;
 
     public static void sort(int[] arr) {

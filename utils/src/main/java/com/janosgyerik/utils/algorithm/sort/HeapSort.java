@@ -3,6 +3,11 @@ package com.janosgyerik.utils.algorithm.sort;
 import static com.janosgyerik.utils.misc.HeapUtils.heapify;
 
 public class HeapSort {
+
+    private HeapSort() {
+        // utility class, forbidden constructor
+    }
+
     public static void sort(int[] arr) {
         heapify(arr);
         heapsort(arr);

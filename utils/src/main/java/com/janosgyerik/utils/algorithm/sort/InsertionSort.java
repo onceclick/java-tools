@@ -1,6 +1,11 @@
 package com.janosgyerik.utils.algorithm.sort;
 
 public class InsertionSort {
+
+    private InsertionSort() {
+        // utility class, forbidden constructor
+    }
+
     public static void sort(int[] arr) {
         int len = arr.length;
         for (int i = 1; i < len; ++i) {

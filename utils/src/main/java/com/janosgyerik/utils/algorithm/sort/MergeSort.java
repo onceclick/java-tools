@@ -2,6 +2,10 @@ package com.janosgyerik.utils.algorithm.sort;
 
 public class MergeSort {
 
+    private MergeSort() {
+        // utility class, forbidden constructor
+    }
+
     public static void sort(int[] arr) {
         mergeSort(arr, 0, arr.length);
     }
