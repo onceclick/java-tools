@@ -2,6 +2,7 @@ package com.janosgyerik.utils.misc;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Stream;
@@ -12,7 +13,7 @@ public final class StringUtils {
 
     static final String ERR_NULL_PARAM = "none of the parameters should be null";
     static final String ERR_SEARCHSTRINGS_REPLACEMENTS_LENGTH_MISMATCH =
-            "there must be the same number of search strings and replacements";
+        "there must be the same number of search strings and replacements";
     static final String ERR_NULL_OR_EMPTY_SEARCHSTRING = "there must be no null element or empty search string";
     static final String ERR_NULL_REPLACEMENT = "there must be no null element in replacements";
     static final String ERR_DUPLICATE_SEARCHSTRINGS = "search strings must be distinct";
@@ -24,9 +25,9 @@ public final class StringUtils {
     /**
      * Replace multiple search strings simultaneously
      *
-     * @param text the source text
+     * @param text          the source text
      * @param searchStrings search strings to replace
-     * @param replacements texts to replace the corresponding search strings
+     * @param replacements  texts to replace the corresponding search strings
      * @return new text with search strings replaced
      */
     public static String replace(String text, String[] searchStrings, String[] replacements) {
@@ -62,14 +63,11 @@ public final class StringUtils {
     }
 
     private static void validateParams(String text, String[] searchStrings, String[] replacements) {
-        if (text == null || searchStrings == null || replacements == null) {
+        if (anyNull(new Object[]{text, searchStrings, replacements})) {
             throw new IllegalArgumentException(ERR_NULL_PARAM);
         }
         if (searchStrings.length != replacements.length) {
             throw new IllegalArgumentException(ERR_SEARCHSTRINGS_REPLACEMENTS_LENGTH_MISMATCH);
-        }
-        if (searchStrings.length == 0) {
-            return;
         }
         if (anyNullOrEmpty(searchStrings)) {
             throw new IllegalArgumentException(ERR_NULL_OR_EMPTY_SEARCHSTRING);
@@ -77,7 +75,7 @@ public final class StringUtils {
         if (anyNull(replacements)) {
             throw new IllegalArgumentException(ERR_NULL_REPLACEMENT);
         }
-        if (containsDuplicates(searchStrings)) {
+        if (!allDistinct(searchStrings)) {
             throw new IllegalArgumentException(ERR_DUPLICATE_SEARCHSTRINGS);
         }
     }
@@ -86,11 +84,11 @@ public final class StringUtils {
         return Stream.of(strings).anyMatch(x -> x == null || x.isEmpty());
     }
 
-    private static boolean anyNull(String[] strings) {
-        return Stream.of(strings).anyMatch(x -> x == null);
+    private static boolean anyNull(Object[] args) {
+        return Stream.of(args).anyMatch(Objects::isNull);
     }
 
-    private static boolean containsDuplicates(String[] strings) {
-        return Stream.of(strings).distinct().count() != strings.length;
+    private static boolean allDistinct(String[] strings) {
+        return Stream.of(strings).distinct().count() == strings.length;
     }
 }
