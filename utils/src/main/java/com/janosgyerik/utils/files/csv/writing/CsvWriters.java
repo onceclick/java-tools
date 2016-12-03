@@ -8,6 +8,10 @@ public class CsvWriters {
     private static final String DEFAULT_SEPARATOR = ",";
     private static final String DEFAULT_NEWLINE = System.getProperty("line.separator");
 
+    private CsvWriters() {
+        // utility class, forbidden constructor
+    }
+
     public static class Builder {
 
         private Writer writer = new PrintWriter(System.out);
@@ -113,10 +117,6 @@ public class CsvWriters {
         public void writeObject(T object) throws IOException {
             writeLine(columnizer.getValues(object));
         }
-    }
-
-    private CsvWriters() {
-        // utility class, forbidden constructor
     }
 
     public static CsvWriter columnsWriter(Writer writer, String separator, String newline) {
