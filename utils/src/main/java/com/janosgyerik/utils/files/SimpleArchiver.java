@@ -39,22 +39,12 @@ public class SimpleArchiver {
     }
 
     private void copy(File source, File target) throws IOException {
-        InputStream input = null;
-        OutputStream output = null;
-        try {
-            input = new FileInputStream(source);
-            output = new FileOutputStream(target);
-            byte[] buf = new byte[1024];
+        byte[] buf = new byte[1024];
+        try (InputStream input = new FileInputStream(source);
+             OutputStream output = new FileOutputStream(target);) {
             int bytesRead;
             while ((bytesRead = input.read(buf)) > 0) {
                 output.write(buf, 0, bytesRead);
-            }
-        } finally {
-            if (input != null) {
-                input.close();
-            }
-            if (output != null) {
-                output.close();
             }
         }
     }
