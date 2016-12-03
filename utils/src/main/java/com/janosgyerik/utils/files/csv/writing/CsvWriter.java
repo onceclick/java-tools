@@ -14,5 +14,6 @@ public interface CsvWriter extends AutoCloseable {
     /**
      * Close the output resource
      */
+    @Override
     void close() throws IOException;
 }
