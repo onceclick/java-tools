@@ -10,16 +10,16 @@ import static java.util.stream.Collectors.joining;
 
 public final class StringUtils {
 
+    static final String ERR_NULL_PARAM = "none of the parameters should be null";
+    static final String ERR_SEARCHSTRINGS_REPLACEMENTS_LENGTH_MISMATCH =
+            "there must be the same number of search strings and replacements";
+    static final String ERR_NULL_OR_EMPTY_SEARCHSTRING = "there must be no null element or empty search string";
+    static final String ERR_NULL_REPLACEMENT = "there must be no null element in replacements";
+    static final String ERR_DUPLICATE_SEARCHSTRINGS = "search strings must be distinct";
+
     private StringUtils() {
         throw new AssertionError("utility class, forbidden constructor");
     }
-
-    protected static final String ERR_NULL_PARAM = "none of the parameters should be null";
-    protected static final String ERR_SEARCHSTRINGS_REPLACEMENTS_LENGTH_MISMATCH =
-            "there must be the same number of search strings and replacements";
-    protected static final String ERR_NULL_OR_EMPTY_SEARCHSTRING = "there must be no null element or empty search string";
-    protected static final String ERR_NULL_REPLACEMENT = "there must be no null element in replacements";
-    protected static final String ERR_DUPLICATE_SEARCHSTRINGS = "search strings must be distinct";
 
     /**
      * Replace multiple search strings simultaneously
@@ -37,6 +37,7 @@ public final class StringUtils {
         }
 
         Map<String, String> searchStringsToReplacements = zipToMap(searchStrings, replacements);
+        // note: using StringBuffer because of match.appendReplacement
         StringBuffer buffer = new StringBuffer();
         Matcher matcher = buildPattern(searchStrings).matcher(text);
         while (matcher.find()) {
