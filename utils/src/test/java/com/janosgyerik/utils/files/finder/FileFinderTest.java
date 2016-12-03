@@ -45,22 +45,22 @@ public abstract class FileFinderTest {
 
     @Test
     public void testNonexistentDir() {
-        assertEquals(0, getFileFinder().findFiles(new File("nonexistent")).size());
+        assertEquals(0, getFileFinder().apply(new File("nonexistent")).size());
     }
 
     @Test
     public void testInvalidPath() {
-        assertEquals(0, getFileFinder().findFiles(new File("!@#$%^&*()")).size());
+        assertEquals(0, getFileFinder().apply(new File("!@#$%^&*()")).size());
     }
 
     @Test
     public void testPathIsFile() throws IOException {
-        assertEquals(0, getFileFinder().findFiles(createTempFile("hello")).size());
+        assertEquals(0, getFileFinder().apply(createTempFile("hello")).size());
     }
 
     @Test
     public void testPathIsEmptyDir() {
-        assertEquals(0, getFileFinder().findFiles(tempDir).size());
+        assertEquals(0, getFileFinder().apply(tempDir).size());
     }
 
     @Test
@@ -70,7 +70,7 @@ public abstract class FileFinderTest {
         File[] files = tempDir.listFiles();
         assertNotNull(files);
         assertTrue(files.length > 1);
-        assertEquals(1, getFileFinder().findFiles(tempDir).size());
+        assertEquals(1, getFileFinder().apply(tempDir).size());
     }
 
     @Test
@@ -80,7 +80,7 @@ public abstract class FileFinderTest {
         File[] files = tempDir.listFiles();
         assertNotNull(files);
         assertTrue(files.length > 2);
-        assertEquals(2, getFileFinder().findFiles(tempDir).size());
+        assertEquals(2, getFileFinder().apply(tempDir).size());
     }
 
     @Test
@@ -89,6 +89,6 @@ public abstract class FileFinderTest {
         File[] files = tempDir.listFiles();
         assertNotNull(files);
         assertTrue(files.length > 0);
-        assertEquals(0, getFileFinder().findFiles(tempDir).size());
+        assertEquals(0, getFileFinder().apply(tempDir).size());
     }
 }

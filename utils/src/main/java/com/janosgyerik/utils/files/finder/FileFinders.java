@@ -23,7 +23,7 @@ public final class FileFinders {
 		}
 
 		@Override
-		public List<File> findFiles(File basedir) {
+		public List<File> apply(File basedir) {
 			File[] files = basedir.listFiles(fileFilter);
 			return files == null ? Collections.<File>emptyList() : Arrays.asList(files);
 		}

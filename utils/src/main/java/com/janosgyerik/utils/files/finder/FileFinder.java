@@ -2,13 +2,10 @@ package com.janosgyerik.utils.files.finder;
 
 import java.io.File;
 import java.util.List;
+import java.util.function.Function;
 
-public interface FileFinder {
-    /**
-     * Find files in a directory, typically filtered by one or more predicates.
-     *
-     * @param basedir Base directory
-     * @return list of files found
-     */
-    List<File> findFiles(File basedir);
+/**
+ * Find files in a directory, typically filtered by one or more predicates.
+ */
+public interface FileFinder extends Function<File, List<File>> {
 }
