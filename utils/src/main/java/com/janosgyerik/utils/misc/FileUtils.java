@@ -80,16 +80,11 @@ public class FileUtils {
             return true;
         }
 
-        InputStream input1 = null;
-        InputStream input2 = null;
-        try {
-            input1 = new FileInputStream(file1);
-            input2 = new FileInputStream(file2);
+        try (
+            InputStream input1 = new FileInputStream(file1);
+            InputStream input2 = new FileInputStream(file2)
+        ) {
             return IOUtils.contentEquals(input1, input2);
-
-        } finally {
-            IOUtils.closeQuietly(input1);
-            IOUtils.closeQuietly(input2);
         }
     }
 
