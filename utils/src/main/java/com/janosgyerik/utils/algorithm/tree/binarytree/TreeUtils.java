@@ -12,11 +12,11 @@ public final class TreeUtils {
 
     /**
      * "Pretty print" a tree, something like this:
-                      A
-             B                  C
-        D        E         F         G
-     H    I    J    K    L    M    N    O
-    P Q  R S  T U  V W  X Y  Z 1  2 3  4 5
+     *                    A
+     *          B                  C
+     *     D        E         F         G
+     *  H    I    J    K    L    M    N    O
+     * P Q  R S  T U  V W  X Y  Z 1  2 3  4 5
      *
      * @param root The root node of the tree
      */
@@ -31,7 +31,7 @@ public final class TreeUtils {
         queue.add(root);
 
         for (int level = 1; level <= height; ++level) {
-            int paddingFirst = (int) Math.pow(2, (height - level));
+            int paddingFirst = (int) Math.pow(2, (double) height - level);
             int paddingBetween = paddingFirst * 2 - 1;
 
             printPadding(paddingFirst);
@@ -75,10 +75,17 @@ public final class TreeUtils {
         return 1 + size(root.left) + size(root.right);
     }
 
-    public static <T extends Comparable<T>> boolean isBinarySearchTree(TreeNode<T> root, T minValue, T maxValue) {
-        return root == null ||
-                minValue.compareTo(root.value) < 0 && root.value.compareTo(maxValue) < 0
-                && isBinarySearchTree(root.left, minValue, root.value)
-                && isBinarySearchTree(root.right, root.value, maxValue);
+    static <T extends Comparable<T>> boolean isBinarySearchTree(TreeNode<T> root, T minValue, T maxValue) {
+        if (root == null) {
+            return true;
+        }
+        return less(minValue, root.value)
+            && less(root.value, maxValue)
+            && isBinarySearchTree(root.left, minValue, root.value)
+            && isBinarySearchTree(root.right, root.value, maxValue);
+    }
+
+    private static <T extends Comparable<T>> boolean less(T left, T right) {
+        return left.compareTo(right) < 0;
     }
 }
