@@ -18,10 +18,8 @@ public class SimpleArchiver {
     }
 
     private void prepareTargetDir() throws IOException {
-        if (!targetDir.isDirectory()) {
-            if (!targetDir.mkdirs()) {
-                throw new IOException("Could not create target directory: " + targetDir);
-            }
+        if (!targetDir.isDirectory() && !targetDir.mkdirs()) {
+            throw new IOException("Could not create target directory: " + targetDir);
         }
     }
 
