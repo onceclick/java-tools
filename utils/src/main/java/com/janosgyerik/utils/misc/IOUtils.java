@@ -37,14 +37,4 @@ public class IOUtils {
         }
         return new BufferedInputStream(inputStream);
     }
-
-    public static void closeQuietly(Closeable closeable) {
-        if (closeable != null) {
-            try {
-                closeable.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-    }
 }
