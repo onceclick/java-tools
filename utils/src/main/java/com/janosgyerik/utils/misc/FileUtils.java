@@ -53,16 +53,9 @@ public class FileUtils {
         }
     }
 
-    // http://grepcode.com/file/repo1.maven.org/maven2/commons-io/commons-io/2.4/org/apache/commons/io/FileUtils.java
     public static boolean contentEquals(File file1, File file2) throws IOException {
-        boolean file1Exists = file1.exists();
-        if (file1Exists != file2.exists()) {
+        if (!file1.exists() || !file2.exists()) {
             return false;
-        }
-
-        if (!file1Exists) {
-            // two not existing files are equal
-            return true;
         }
 
         if (file1.isDirectory() || file2.isDirectory()) {
