@@ -16,7 +16,7 @@ import static org.junit.Assert.assertTrue;
 
 public abstract class FileFinderTest {
 
-    protected File tempDir;
+    private File tempDir;
 
     abstract FileFinder getFileFinder();
 

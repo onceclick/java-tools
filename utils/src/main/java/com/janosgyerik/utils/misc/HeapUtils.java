@@ -41,7 +41,8 @@ public final class HeapUtils {
         }
     }
 
-    private static void siftUp(int[] arr, int index) {
+    private static void siftUp(int[] arr, int start) {
+        int index = start;
         do {
             int parentIndex = getParentIndex(index);
             if (arr[parentIndex] >= arr[index]) {
