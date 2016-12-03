@@ -6,6 +6,11 @@ import static org.junit.Assert.*;
 
 public class HeapUtilsTest {
     @Test
+    public void is_max_heap_empty() {
+        assertTrue(HeapUtils.isHeap(new int[0]));
+    }
+
+    @Test
     public void is_max_heap_1_2_3() {
         assertFalse(HeapUtils.isHeap(new int[]{1, 2, 3}));
     }

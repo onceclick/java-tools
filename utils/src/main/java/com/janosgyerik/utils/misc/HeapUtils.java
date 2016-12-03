@@ -7,22 +7,21 @@ public final class HeapUtils {
     }
 
     public static boolean isHeap(int[] arr) {
-        for (int i = 0; i < arr.length - 1; ++i) {
+        for (int i = 0; i < arr.length; ++i) {
             int leftIndex = i * 2 + 1;
-            if (leftIndex < arr.length) {
-                if (arr[i] < arr[leftIndex]) {
-                    return false;
-                }
-                int rightIndex = i * 2 + 2;
-                if (rightIndex < arr.length) {
-                    if (arr[i] < arr[rightIndex]) {
-                        return false;
-                    }
-                } else {
-                    break;
-                }
-            } else {
-                break;
+            if (leftIndex >= arr.length) {
+                return true;
+            }
+            if (arr[i] < arr[leftIndex]) {
+                return false;
+            }
+
+            int rightIndex = i * 2 + 2;
+            if (rightIndex >= arr.length) {
+                return true;
+            }
+            if (arr[i] < arr[rightIndex]) {
+                return false;
             }
         }
         return true;
