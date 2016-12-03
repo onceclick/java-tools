@@ -39,8 +39,11 @@ public class FileUtils {
         if (fileOrDir.isFile()) {
             deleteFile(fileOrDir);
         } else if (fileOrDir.isDirectory()) {
-            for (String name : fileOrDir.list()) {
-                deleteRecursively(new File(fileOrDir, name));
+            String[] names = fileOrDir.list();
+            if (names != null) {
+                for (String name : names) {
+                    deleteRecursively(new File(fileOrDir, name));
+                }
             }
             if (!fileOrDir.delete()) {
                 throw new IOException("Could not delete dir: " + fileOrDir);
