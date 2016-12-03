@@ -21,14 +21,24 @@ public class MergeSort {
         merge(arr, from, mid, to);
     }
 
-    protected static void merge(int[] arr, int from, int mid, int to) {
+    static void merge(int[] arr, int from, int mid, int to) {
         int[] sorted = new int[to - from];
-        for (int i = 0, pos1 = from, pos2 = mid; i < sorted.length; ++i) {
-            if (pos1 < mid && (pos2 >= to || arr[pos1] <= arr[pos2])) {
-                sorted[i] = arr[pos1++];
+        int i = 0;
+        int pos1 = from;
+        int pos2 = mid;
+
+        while (pos1 < mid && pos2 < to) {
+            if (arr[pos1] <= arr[pos2]) {
+                sorted[i++] = arr[pos1++];
             } else {
-                sorted[i] = arr[pos2++];
+                sorted[i++] = arr[pos2++];
             }
+        }
+        while (pos1 < mid) {
+            sorted[i++] = arr[pos1++];
+        }
+        while (pos2 < to) {
+            sorted[i++] = arr[pos2++];
         }
         System.arraycopy(sorted, 0, arr, from, sorted.length);
     }
