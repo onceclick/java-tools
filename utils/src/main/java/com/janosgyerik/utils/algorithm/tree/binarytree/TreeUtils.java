@@ -1,5 +1,6 @@
 package com.janosgyerik.utils.algorithm.tree.binarytree;
 
+import java.io.PrintStream;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
@@ -20,7 +21,7 @@ public final class TreeUtils {
      *
      * @param root The root node of the tree
      */
-    public static void print(TreeNode<?> root) {
+    public static void print(TreeNode<?> root, PrintStream out) {
         if (root == null) {
             return;
         }
@@ -34,30 +35,30 @@ public final class TreeUtils {
             int paddingFirst = (int) Math.pow(2, (double) height - level);
             int paddingBetween = paddingFirst * 2 - 1;
 
-            printPadding(paddingFirst);
+            printPadding(out, paddingFirst);
 
             List<TreeNode<?>> copy = new LinkedList<>(queue);
             queue.clear();
 
             for (TreeNode<?> node : copy) {
                 if (node == null) {
-                    System.out.print(" ");
+                    out.print(" ");
                     queue.add(null);
                     queue.add(null);
                 } else {
-                    System.out.print(node.value);
+                    out.print(node.value);
                     queue.add(node.left);
                     queue.add(node.right);
                 }
-                printPadding(paddingBetween);
+                printPadding(out, paddingBetween);
             }
-            System.out.println();
+            out.println();
         }
     }
 
-    private static void printPadding(int padding) {
+    private static void printPadding(PrintStream out, int padding) {
         for (int i = 0; i < padding; ++i) {
-            System.out.print(" ");
+            out.print(" ");
         }
     }
 
