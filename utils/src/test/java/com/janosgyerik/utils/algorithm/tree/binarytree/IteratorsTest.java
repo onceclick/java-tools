@@ -16,18 +16,18 @@ public class IteratorsTest {
       A   D       I
          C E     H
           */
-    private final TreeNode<Character> root;
+    private final Node<Character> root;
 
     public IteratorsTest() {
-        root = new TreeNode<>('F');
-        root.left = new TreeNode<>('B');
-        root.left.left = new TreeNode<>('A');
-        root.left.right = new TreeNode<>('D');
-        root.left.right.left = new TreeNode<>('C');
-        root.left.right.right = new TreeNode<>('E');
-        root.right = new TreeNode<>('G');
-        root.right.right = new TreeNode<>('I');
-        root.right.right.left = new TreeNode<>('H');
+        root = new Node<>('F');
+        root.left = new Node<>('B');
+        root.left.left = new Node<>('A');
+        root.left.right = new Node<>('D');
+        root.left.right.left = new Node<>('C');
+        root.left.right.right = new Node<>('E');
+        root.right = new Node<>('G');
+        root.right.right = new Node<>('I');
+        root.right.right.left = new Node<>('H');
     }
 
     static <T> List<T> iterateToList(Iterator<T> iterator) {
@@ -46,7 +46,7 @@ public class IteratorsTest {
 
     @Test(expected = NoSuchElementException.class)
     public void preOrderIterator_should_throw_if_iterated_beyond() {
-        Iterator<Character> iterator = preOrderIterator(new TreeNode<>('A'));
+        Iterator<Character> iterator = preOrderIterator(new Node<>('A'));
         iterator.next();
         iterator.next();
     }
@@ -59,7 +59,7 @@ public class IteratorsTest {
 
     @Test(expected = NoSuchElementException.class)
     public void inOrderIterator_should_throw_if_iterated_beyond() {
-        Iterator<Character> iterator = inOrderIterator(new TreeNode<>('A'));
+        Iterator<Character> iterator = inOrderIterator(new Node<>('A'));
         iterator.next();
         iterator.next();
     }
@@ -72,7 +72,7 @@ public class IteratorsTest {
 
     @Test(expected = NoSuchElementException.class)
     public void postOrderIterator_should_throw_if_iterated_beyond() {
-        Iterator<Character> iterator = postOrderIterator(new TreeNode<>('A'));
+        Iterator<Character> iterator = postOrderIterator(new Node<>('A'));
         iterator.next();
         iterator.next();
     }
@@ -85,7 +85,7 @@ public class IteratorsTest {
 
     @Test(expected = NoSuchElementException.class)
     public void levelOrderIterator_should_throw_if_iterated_beyond() {
-        Iterator<Character> iterator = levelOrderIterator(new TreeNode<>('A'));
+        Iterator<Character> iterator = levelOrderIterator(new Node<>('A'));
         iterator.next();
         iterator.next();
     }

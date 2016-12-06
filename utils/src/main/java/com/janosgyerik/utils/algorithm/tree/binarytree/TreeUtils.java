@@ -21,14 +21,14 @@ public final class TreeUtils {
      *
      * @param root The root node of the tree
      */
-    public static void print(TreeNode<?> root, PrintStream out) {
+    public static void print(Node<?> root, PrintStream out) {
         if (root == null) {
             return;
         }
 
         int height = height(root);
 
-        Queue<TreeNode<?>> queue = new LinkedList<>();
+        Queue<Node<?>> queue = new LinkedList<>();
         queue.add(root);
 
         for (int level = 1; level <= height; ++level) {
@@ -37,10 +37,10 @@ public final class TreeUtils {
 
             printPadding(out, paddingFirst);
 
-            List<TreeNode<?>> copy = new LinkedList<>(queue);
+            List<Node<?>> copy = new LinkedList<>(queue);
             queue.clear();
 
-            for (TreeNode<?> node : copy) {
+            for (Node<?> node : copy) {
                 if (node == null) {
                     out.print(" ");
                     queue.add(null);
@@ -62,21 +62,21 @@ public final class TreeUtils {
         }
     }
 
-    public static int height(TreeNode<?> root) {
+    public static int height(Node<?> root) {
         if (root == null) {
             return 0;
         }
         return 1 + Math.max(height(root.left), height(root.right));
     }
 
-    public static int size(TreeNode<?> root) {
+    public static int size(Node<?> root) {
         if (root == null) {
             return 0;
         }
         return 1 + size(root.left) + size(root.right);
     }
 
-    static <T extends Comparable<T>> boolean isBinarySearchTree(TreeNode<T> root, T minValue, T maxValue) {
+    static <T extends Comparable<T>> boolean isBinarySearchTree(Node<T> root, T minValue, T maxValue) {
         if (root == null) {
             return true;
         }

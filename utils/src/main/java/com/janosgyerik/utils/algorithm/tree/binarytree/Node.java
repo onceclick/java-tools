@@ -1,17 +1,17 @@
 package com.janosgyerik.utils.algorithm.tree.binarytree;
 
-public class TreeNode<T> {
+public class Node<T> {
 
     public final T value;
-    public TreeNode<T> parent;
-    public TreeNode<T> left;
-    public TreeNode<T> right;
+    public Node<T> parent;
+    public Node<T> left;
+    public Node<T> right;
 
-    public TreeNode(T value) {
+    public Node(T value) {
         this(null, value);
     }
 
-    public TreeNode(TreeNode<T> parent, T value) {
+    public Node(Node<T> parent, T value) {
         this.parent = parent;
         this.value = value;
     }

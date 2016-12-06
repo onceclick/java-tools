@@ -1,6 +1,6 @@
 package com.janosgyerik.utils.algorithm.tree.binarytree.balanced;
 
-import com.janosgyerik.utils.algorithm.tree.binarytree.TreeNode;
+import com.janosgyerik.utils.algorithm.tree.binarytree.Node;
 
 public class BalancedTreeUtils {
 
@@ -20,7 +20,7 @@ public class BalancedTreeUtils {
      * @param root the root node of the tree
      * @return true if the tree is balanced
      */
-    public static boolean isBalanced(TreeNode<?> root) {
+    public static boolean isBalanced(Node<?> root) {
         return balancedHeight(root) != UNBALANCED;
     }
 
@@ -31,7 +31,7 @@ public class BalancedTreeUtils {
      * @param root the root node of the tree
      * @return the height if the tree is balanced, otherwise the constant UNBALANCED
      */
-    private static int balancedHeight(TreeNode<?> root) {
+    private static int balancedHeight(Node<?> root) {
         if (root == null) {
             return 0;
         }

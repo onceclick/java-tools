@@ -6,15 +6,15 @@ import java.util.Queue;
 
 public class BinarySearchTreeImpl<T extends Comparable<T>> implements BinarySearchTree<T> {
 
-    private TreeNode<T> root = null;
+    private Node<T> root = null;
 
-    public TreeNode<T> getRoot() {
+    public Node<T> getRoot() {
         return root;
     }
 
     @Override
     public void insert(T value) {
-        TreeNode<T> newNode = new TreeNode<>(value);
+        Node<T> newNode = new Node<>(value);
         if (root == null) {
             root = newNode;
         } else {
@@ -27,7 +27,7 @@ public class BinarySearchTreeImpl<T extends Comparable<T>> implements BinarySear
         values.forEach(this::insert);
     }
 
-    private void insert(TreeNode<T> node, TreeNode<T> other) {
+    private void insert(Node<T> node, Node<T> other) {
         assert other != null;
 
         int compare = other.value.compareTo(node.value);
@@ -49,7 +49,7 @@ public class BinarySearchTreeImpl<T extends Comparable<T>> implements BinarySear
         }
     }
 
-    private TreeNode<T> find(TreeNode<T> node, T value) {
+    private Node<T> find(Node<T> node, T value) {
         if (node == null) {
             return null;
         }
@@ -70,7 +70,7 @@ public class BinarySearchTreeImpl<T extends Comparable<T>> implements BinarySear
 
     @Override
     public void delete(T value) {
-        TreeNode<T> deleted = find(root, value);
+        Node<T> deleted = find(root, value);
         if (deleted == null) {
             return;
         }
@@ -88,7 +88,7 @@ public class BinarySearchTreeImpl<T extends Comparable<T>> implements BinarySear
                 root = null;
             }
         } else {
-            TreeNode<T> parent = deleted.parent;
+            Node<T> parent = deleted.parent;
             if (parent.left == deleted) {
                 deleted = parent.left;
                 parent.left = null;
@@ -109,11 +109,11 @@ public class BinarySearchTreeImpl<T extends Comparable<T>> implements BinarySear
     public String serialize() {
         StringBuilder builder = new StringBuilder();
 
-        Queue<TreeNode<T>> queue = new LinkedList<>();
+        Queue<Node<T>> queue = new LinkedList<>();
         queue.add(getRoot());
 
         while (!queue.isEmpty()) {
-            TreeNode<T> node = queue.poll();
+            Node<T> node = queue.poll();
             if (node == null) {
                 builder.append('#');
             } else {
