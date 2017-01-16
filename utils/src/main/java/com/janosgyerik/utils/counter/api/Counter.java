@@ -38,5 +38,5 @@ public interface Counter<T> {
      *
      * @return the counts as a map
      */
-    Map<T, Integer> map();
+    Map<T, Integer> counts();
 }

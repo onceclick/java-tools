@@ -30,7 +30,7 @@ public final class Counters {
         }
 
         @Override
-        public Map<T, Integer> map() {
+        public Map<T, Integer> counts() {
             return counts;
         }
 
@@ -55,7 +55,7 @@ public final class Counters {
         private void ensureSortedEntries() {
             if (modifiedSinceLastSort) {
                 sortedEntries.clear();
-                sortedEntries.addAll(counter.map().entrySet());
+                sortedEntries.addAll(counter.counts().entrySet());
                 sortedEntries.sort(countComparator);
                 modifiedSinceLastSort = false;
             }
@@ -128,8 +128,8 @@ public final class Counters {
         }
 
         @Override
-        public Map<T, Integer> map() {
-            return counter.map();
+        public Map<T, Integer> counts() {
+            return counter.counts();
         }
 
         @Override
