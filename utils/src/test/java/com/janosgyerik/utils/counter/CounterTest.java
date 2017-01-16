@@ -7,7 +7,10 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
-import static org.junit.Assert.*;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertEquals;
 
 public class CounterTest {
 
@@ -61,5 +64,11 @@ public class CounterTest {
 
         counter.add("hello");
         assertEquals(2, counter.get("hello"));
+    }
+
+    @Test(expected = UnsupportedOperationException.class)
+    public void should_not_expose_internal_map_of_counts() {
+        Counter<String> counter = Counters.counter();
+        counter.counts().put("some key", 7);
     }
 }

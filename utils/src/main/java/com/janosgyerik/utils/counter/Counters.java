@@ -31,7 +31,7 @@ public final class Counters {
 
         @Override
         public Map<T, Integer> counts() {
-            return counts;
+            return Collections.unmodifiableMap(counts);
         }
 
         @Override
