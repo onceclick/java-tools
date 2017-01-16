@@ -13,14 +13,14 @@ public interface Counter<T> {
     /**
      * Add an item, incrementing its count.
      *
-     * @param item The item to count
+     * @param item the item to count
      */
     void add(T item);
 
     /**
      * Add a collection of items, incrementing their count.
      *
-     * @param items The items to count
+     * @param items the items to count
      */
     void addAll(Collection<T> items);
 
@@ -28,15 +28,15 @@ public interface Counter<T> {
      * Return the count of specified item.
      * If the item was never added to the counter, return 0.
      *
-     * @param item The item whose count to find
-     * @return The count of the item
+     * @param item the item whose count to find
+     * @return the count of the item
      */
     int get(T item);
 
     /**
-     * Return the internal map of counts.
+     * Return the counts as a map.
      *
-     * @return the map of counts
+     * @return the counts as a map
      */
     Map<T, Integer> map();
 }
