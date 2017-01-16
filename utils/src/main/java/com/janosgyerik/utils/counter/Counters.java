@@ -13,11 +13,7 @@ public final class Counters {
 
     private static class CounterImpl<T> implements Counter<T> {
 
-        private final Map<T, Integer> counts;
-
-        private CounterImpl() {
-            this.counts = new HashMap<>();
-        }
+        private final Map<T, Integer> counts = new HashMap<>();
 
         @Override
         public void add(T item) {
