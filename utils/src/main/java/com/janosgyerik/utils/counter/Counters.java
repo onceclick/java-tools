@@ -41,7 +41,7 @@ public final class Counters {
         private final Counter<T> counter = new CounterImpl<>();
 
         private final Comparator<Map.Entry<T, Integer>> countComparator =
-                (o1, o2) -> Integer.compare(o1.getValue(), o2.getValue());
+            Comparator.comparingInt(Map.Entry::getValue);
 
         private final List<Map.Entry<T, Integer>> sortedEntries = new ArrayList<>();
 
