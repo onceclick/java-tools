@@ -32,8 +32,7 @@ public final class Counters {
 
         @Override
         public int get(T item) {
-            Integer count = counts.get(item);
-            return count != null ? count : 0;
+            return counts.getOrDefault(item, 0);
         }
     }
 
