@@ -13,7 +13,15 @@ public final class Counters {
 
     private static class CounterImpl<T> implements Counter<T> {
 
-        private final Map<T, Integer> counts = new HashMap<>();
+        private final Map<T, Integer> counts;
+
+        private CounterImpl() {
+            this(new HashMap<>());
+        }
+
+        private CounterImpl(Map<T, Integer> map) {
+            this.counts = map;
+        }
 
         @Override
         public void add(T item) {
@@ -135,6 +143,10 @@ public final class Counters {
 
     public static <T> Counter<T> counter() {
         return new CounterImpl<>();
+    }
+
+    public static <T> Counter<T> counter(Map<T, Integer> map) {
+        return new CounterImpl<>(map);
     }
 
     public static <T> SortedCounter<T> sortedCounter() {
