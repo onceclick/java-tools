@@ -41,9 +41,12 @@ public class CounterTest {
         assertThat(counter.get(item2)).isEqualTo(1);
     }
 
-    @Test(expected = UnsupportedOperationException.class)
-    public void should_not_expose_internal_map_of_counts() {
+    @Test
+    public void test_internal_state_is_mutable() {
         Counter<String> counter = Counters.counter();
-        counter.counts().put("some key", 7);
+        String item = "value";
+        int count = 7;
+        counter.counts().put(item, count);
+        assertThat(counter.get(item)).isEqualTo(count);
     }
 }

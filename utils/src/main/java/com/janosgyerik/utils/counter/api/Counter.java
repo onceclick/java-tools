@@ -5,6 +5,7 @@ import java.util.Map;
 
 /**
  * Build a map of counts of objects.
+ * Use the Counters utility class to obtain different specialized implementations.
  *
  * @param <T> type of the counted objects
  */
@@ -35,6 +36,8 @@ public interface Counter<T> {
 
     /**
      * Return the counts as a map.
+     * Note that for maximum usability, some implementations may expose
+     * the internal map of counts.
      *
      * @return the counts as a map
      */
