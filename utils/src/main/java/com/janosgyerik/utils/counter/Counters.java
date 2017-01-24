@@ -24,13 +24,15 @@ public final class Counters {
         }
 
         @Override
-        public void add(T item) {
+        public Counter<T> add(T item) {
             counts.put(item, get(item) + 1);
+            return this;
         }
 
         @Override
-        public void addAll(Collection<T> items) {
+        public Counter<T> addAll(Collection<T> items) {
             items.forEach(this::add);
+            return this;
         }
 
         @Override
@@ -119,15 +121,17 @@ public final class Counters {
         }
 
         @Override
-        public void add(T item) {
+        public Counter<T> add(T item) {
             counter.add(item);
             modifiedSinceLastSort = true;
+            return this;
         }
 
         @Override
-        public void addAll(Collection<T> items) {
+        public Counter<T> addAll(Collection<T> items) {
             counter.addAll(items);
             modifiedSinceLastSort = true;
+            return this;
         }
 
         @Override

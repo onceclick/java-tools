@@ -16,14 +16,14 @@ public interface Counter<T> {
      *
      * @param item the item to count
      */
-    void add(T item);
+    Counter<T> add(T item);
 
     /**
      * Add a collection of items, incrementing their count.
      *
      * @param items the items to count
      */
-    void addAll(Collection<T> items);
+    Counter<T> addAll(Collection<T> items);
 
     /**
      * Return the count of specified item.
