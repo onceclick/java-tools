@@ -3,15 +3,15 @@ package com.janosgyerik.utils.algorithm.tree.binarytree;
 class Node<T> {
 
     public final T value;
-    public Node<T> parent;
-    public Node<T> left;
-    public Node<T> right;
+    Node<T> parent;
+    Node<T> left;
+    Node<T> right;
 
-    public Node(T value) {
+    Node(T value) {
         this(null, value);
     }
 
-    public Node(Node<T> parent, T value) {
+    private Node(Node<T> parent, T value) {
         this.parent = parent;
         this.value = value;
     }
