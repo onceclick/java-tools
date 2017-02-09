@@ -1,19 +1,19 @@
-package com.janosgyerik.utils.algorithm.tree.binarytree.balanced;
+package com.janosgyerik.utils.algorithm.tree.binarytree;
 
-import com.janosgyerik.utils.algorithm.tree.binarytree.Node;
 import org.junit.Test;
 
+import static com.janosgyerik.utils.algorithm.tree.binarytree.TreeUtils.isBalanced;
 import static org.junit.Assert.*;
 
 public class BalancedTreeUtilsTest {
     @Test
     public void test_empty_is_balanced() {
-        assertTrue(BalancedTreeUtils.isBalanced(null));
+        assertTrue(isBalanced(null));
     }
 
     @Test
     public void test_singleton_is_balanced() {
-        assertTrue(BalancedTreeUtils.isBalanced(new Node<>(3)));
+        assertTrue(isBalanced(new Node<>(3)));
     }
 
     @Test
@@ -21,10 +21,10 @@ public class BalancedTreeUtilsTest {
         Node<Integer> root = new Node<>(3);
 
         root.left = new Node<>(4);
-        assertTrue(BalancedTreeUtils.isBalanced(root));
+        assertTrue(isBalanced(root));
 
         root.left.left = new Node<>(5);
-        assertFalse(BalancedTreeUtils.isBalanced(root));
+        assertFalse(isBalanced(root));
     }
 
     @Test
@@ -33,14 +33,14 @@ public class BalancedTreeUtilsTest {
 
         root.left = new Node<>(4);
         root.left.left = new Node<>(5);
-        assertFalse(BalancedTreeUtils.isBalanced(root));
+        assertFalse(isBalanced(root));
 
         root.right = new Node<>(6);
-        assertTrue(BalancedTreeUtils.isBalanced(root));
+        assertTrue(isBalanced(root));
         root.right.right = new Node<>(7);
-        assertTrue(BalancedTreeUtils.isBalanced(root));
+        assertTrue(isBalanced(root));
 
         root.right.right.left = new Node<>(8);
-        assertFalse(BalancedTreeUtils.isBalanced(root));
+        assertFalse(isBalanced(root));
     }
 }

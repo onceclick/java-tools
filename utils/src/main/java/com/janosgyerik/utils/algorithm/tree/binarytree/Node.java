@@ -1,6 +1,6 @@
 package com.janosgyerik.utils.algorithm.tree.binarytree;
 
-public class Node<T> {
+class Node<T> {
 
     public final T value;
     public Node<T> parent;
