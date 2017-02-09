@@ -84,13 +84,24 @@ public class BinarySearchTreeImplTest {
         assertBinarySearchTree(tree);
 
         tree.delete(value);
-        assertTreeSize(list.size() - 1, tree);
+        int expectedSizeDiff = list.contains(value) ? -1 : 0;
+        assertTreeSize(list.size() + expectedSizeDiff, tree);
         assertBinarySearchTree(tree);
+    }
+
+    @Test
+    public void test_delete_root() {
+        testDeleteNode(Collections.singletonList(3), 3);
     }
 
     @Test
     public void test_delete_leaf() {
         testDeleteNode(Arrays.asList(1, 2, 3), 3);
+    }
+
+    @Test
+    public void test_delete_nothing() {
+        testDeleteNode(Arrays.asList(1, 2, 3), 4);
     }
 
     @Test
@@ -111,6 +122,16 @@ public class BinarySearchTreeImplTest {
     @Test
     public void test_delete_root_with_both_left_right() {
         testDeleteNode(Arrays.asList(2, 1, 3), 2);
+    }
+
+    @Test
+    public void test_delete_left_leaf() {
+        testDeleteNode(Arrays.asList(2, 1, 3), 1);
+    }
+
+    @Test
+    public void test_delete_left_intermediate() {
+        testDeleteNode(Arrays.asList(3, 2, 1), 2);
     }
 
     @Test
