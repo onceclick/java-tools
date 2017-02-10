@@ -87,21 +87,22 @@ public class BinarySearchTreeImpl<T extends Comparable<T>> implements BinarySear
             } else {
                 root = null;
             }
+            return;
+        }
+
+        Node<T> parent = deleted.parent;
+        if (parent.left == deleted) {
+            deleted = parent.left;
+            parent.left = null;
         } else {
-            Node<T> parent = deleted.parent;
-            if (parent.left == deleted) {
-                deleted = parent.left;
-                parent.left = null;
-            } else {
-                deleted = parent.right;
-                parent.right = null;
-            }
-            if (deleted.left != null) {
-                insert(parent, deleted.left);
-            }
-            if (deleted.right != null) {
-                insert(parent, deleted.right);
-            }
+            deleted = parent.right;
+            parent.right = null;
+        }
+        if (deleted.left != null) {
+            insert(parent, deleted.left);
+        }
+        if (deleted.right != null) {
+            insert(parent, deleted.right);
         }
     }
 
