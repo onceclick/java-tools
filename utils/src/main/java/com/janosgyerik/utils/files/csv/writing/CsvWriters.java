@@ -14,22 +14,16 @@ public class CsvWriters {
 
     public static class Builder {
 
-        private Writer writer = new PrintWriter(System.out);
+        private final Writer writer;
         private String separator = DEFAULT_SEPARATOR;
         private String newline = DEFAULT_NEWLINE;
 
-        public Builder writer(Writer writer) {
+        private Builder(Writer writer) {
             this.writer = writer;
-            return this;
         }
 
-        public Builder path(String path) throws FileNotFoundException {
-            writer = createWriter(path);
-            return this;
-        }
-
-        private Writer createWriter(String path) throws FileNotFoundException {
-            return new PrintWriter(new File(path));
+        private Builder(String path) throws IOException {
+            this.writer = new FileWriter(path);
         }
 
         public Builder separator(String separator) {
@@ -55,8 +49,12 @@ public class CsvWriters {
         }
     }
 
-    public static Builder builder() {
-        return new Builder();
+    public static Builder builder(Writer writer) {
+        return new Builder(writer);
+    }
+
+    public static Builder builder(String path) throws IOException {
+        return new Builder(path);
     }
 
     private static class AbstractCsvWriter implements CsvWriter {

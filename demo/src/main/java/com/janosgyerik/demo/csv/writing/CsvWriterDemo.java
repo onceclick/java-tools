@@ -7,9 +7,7 @@ import com.janosgyerik.utils.files.csv.writing.CsvWriters;
 import com.janosgyerik.utils.files.csv.writing.ObjectWriter;
 import com.janosgyerik.utils.misc.FileUtils;
 
-import java.io.File;
-import java.io.IOException;
-import java.io.StringWriter;
+import java.io.*;
 import java.util.Arrays;
 import java.util.List;
 
@@ -38,9 +36,13 @@ public class CsvWriterDemo {
         demo.writeCollectionDemo();
     }
 
+    private PrintWriter newWriter() {
+        return new PrintWriter(System.out);
+    }
+
     private void writeColumnsDemo() throws IOException {
         printHeader("writeColumnsDemo");
-        CsvWriter writer = CsvWriters.builder().columnsWriter();
+        CsvWriter writer = CsvWriters.builder(newWriter()).columnsWriter();
         writer.writeLine("name", "age");
         Person person = persons.get(0);
         writer.writeLine(person.name, person.age);
@@ -48,7 +50,7 @@ public class CsvWriterDemo {
 
     private void writeObjectsDemo() throws IOException {
         printHeader("writeObjectsDemo");
-        ObjectWriter<Person> writer = CsvWriters.builder().objectWriter(columnizer);
+        ObjectWriter<Person> writer = CsvWriters.builder(newWriter()).objectWriter(columnizer);
         writer.writeHeader();
         writer.writeObject(persons.get(0));
     }
@@ -57,7 +59,7 @@ public class CsvWriterDemo {
         printHeader("writeToBufferDemo");
 
         StringWriter writer = new StringWriter();
-        CsvWriters.builder().writer(writer).write(persons, columnizer);
+        CsvWriters.builder(writer).write(persons, columnizer);
 
         System.out.println(writer.toString());
     }
@@ -66,14 +68,14 @@ public class CsvWriterDemo {
         printHeader("writeToFileDemo");
 
         String path = FileUtils.createTempFile().getPath();
-        CsvWriters.builder().path(path).write(persons, columnizer);
+        CsvWriters.builder(new FileWriter(path)).write(persons, columnizer);
 
         System.out.println(FileUtils.read(new File(path)));
     }
 
     private void writeCollectionDemo() throws IOException {
         printHeader("writeCollectionDemo");
-        CsvWriters.builder().write(persons, columnizer);
+        CsvWriters.builder(newWriter()).write(persons, columnizer);
     }
 
     private void printHeader(String label) {

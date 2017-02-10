@@ -33,7 +33,7 @@ public class ObjectWriterTest {
     @Test
     public void test_write_header() throws IOException {
         StringWriter stringWriter = new StringWriter();
-        ObjectWriter<Person> writer = CsvWriters.builder().writer(stringWriter).objectWriter(columnizer);
+        ObjectWriter<Person> writer = CsvWriters.builder(stringWriter).objectWriter(columnizer);
         writer.writeHeader();
         assertEquals("Name,Age\n", stringWriter.toString());
     }
@@ -41,7 +41,7 @@ public class ObjectWriterTest {
     @Test
     public void test_write_object() throws IOException {
         StringWriter stringWriter = new StringWriter();
-        ObjectWriter<Person> writer = CsvWriters.builder().writer(stringWriter).objectWriter(columnizer);
+        ObjectWriter<Person> writer = CsvWriters.builder(stringWriter).objectWriter(columnizer);
         writer.writeObject(new Person("Jack", 21));
         assertEquals("Jack,21\n", stringWriter.toString());
     }
@@ -49,7 +49,7 @@ public class ObjectWriterTest {
     @Test
     public void test_write_header_and_two_objects() throws IOException {
         StringWriter stringWriter = new StringWriter();
-        ObjectWriter<Person> writer = CsvWriters.builder().writer(stringWriter).objectWriter(columnizer);
+        ObjectWriter<Person> writer = CsvWriters.builder(stringWriter).objectWriter(columnizer);
         writer.writeHeader();
         writer.writeObject(new Person("Jack", 22));
         writer.writeObject(new Person("Mike", 23));
