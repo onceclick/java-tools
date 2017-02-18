@@ -14,7 +14,7 @@ public class Paths {
     private final int[] edgeTo;
 
     /**
-     * Find paths in s from source s.
+     * Find paths in g from source s.
      */
     public Paths(Graph g, int s) {
         start = s;
@@ -36,16 +36,6 @@ public class Paths {
                     visited[w] = true;
                     edgeTo[w] = x;
                 }
-            }
-        }
-    }
-
-    private void dfs(Graph g, int v) {
-        visited[v] = true;
-        for (int w : g.adj(v)) {
-            if (!visited[w]) {
-                dfs(g, w);
-                edgeTo[w] = v;
             }
         }
     }
