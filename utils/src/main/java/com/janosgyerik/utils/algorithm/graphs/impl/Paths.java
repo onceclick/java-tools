@@ -4,6 +4,8 @@ import com.janosgyerik.utils.algorithm.graphs.api.Graph;
 
 import java.util.ArrayDeque;
 import java.util.Collection;
+import java.util.LinkedList;
+import java.util.Queue;
 
 public class Paths {
 
@@ -18,7 +20,24 @@ public class Paths {
         start = s;
         visited = new boolean[g.vertexCount()];
         edgeTo = new int[g.vertexCount()];
-        dfs(g, s);
+        bfs(g, s);
+    }
+
+    private void bfs(Graph g, int v) {
+        Queue<Integer> queue = new LinkedList<>();
+        queue.add(v);
+        visited[v] = true;
+
+        while (!queue.isEmpty()) {
+            int x = queue.poll();
+            for (int w : g.adj(x)) {
+                if (!visited[w]) {
+                    queue.add(w);
+                    visited[w] = true;
+                    edgeTo[w] = x;
+                }
+            }
+        }
     }
 
     private void dfs(Graph g, int v) {

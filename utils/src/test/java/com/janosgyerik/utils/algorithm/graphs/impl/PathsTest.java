@@ -14,8 +14,8 @@ public class PathsTest {
         Graph g = Graphs.newUndirectedGraph();
         g.addEdge(0, 1);
         g.addEdge(0, 2);
-        g.addEdge(0, 6);
         g.addEdge(0, 5);
+        g.addEdge(0, 6);
         g.addEdge(3, 4);
         g.addEdge(3, 5);
         g.addEdge(4, 5);
@@ -37,7 +37,7 @@ public class PathsTest {
 
     @Test
     public void test_pathTo() {
-        assertThat(paths.pathTo(5)).containsExactly(0, 6, 4, 3, 5);
+        assertThat(paths.pathTo(3)).containsExactly(0, 5, 3);
         assertThat(paths.pathTo(2)).containsExactly(0, 2);
     }
 }
