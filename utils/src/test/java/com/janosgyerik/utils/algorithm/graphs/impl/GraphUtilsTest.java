@@ -6,7 +6,7 @@ import org.junit.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class GraphUtilsTest {
-    private final Graph g = new UndirectedGraph();
+    private final Graph g = Graphs.newUndirectedGraph();
     {
         g.addEdge(0, 1);
         g.addEdge(0, 2);
