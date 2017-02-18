@@ -53,4 +53,32 @@ public class GraphUtils {
         }
         return true;
     }
+
+    /**
+     * Check if a connected graph has cycles.
+     */
+    public static boolean hasCycle(Graph g) {
+        boolean[] visited = new boolean[g.vertexCount()];
+        int[] edgeTo = new int[g.vertexCount()];
+        ArrayDeque<Integer> stack = new ArrayDeque<>();
+        stack.add(0);
+        visited[0] = true;
+        while (!stack.isEmpty()) {
+            int v = stack.pop();
+            for (int w : g.adj(v)) {
+                if (edgeTo[v] == w) {
+                    // the vertex from which we got here
+                    continue;
+                }
+                if (!visited[w]) {
+                    visited[w] = true;
+                    edgeTo[w] = v;
+                    stack.push(w);
+                } else {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
 }
