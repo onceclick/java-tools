@@ -2,6 +2,7 @@ package com.janosgyerik.utils.algorithm.graphs.impl;
 
 import com.janosgyerik.utils.algorithm.graphs.api.Graph;
 
+import java.util.ArrayDeque;
 import java.util.stream.IntStream;
 
 public class GraphUtils {
@@ -27,5 +28,29 @@ public class GraphUtils {
 
     public static int selfLoopCount(Graph g) {
         return IntStream.range(0, g.vertexCount()).map(v -> (int) g.adj(v).stream().filter(w -> v == w).count()).sum();
+    }
+
+    /**
+     * Check if a connected graph is bipartite.
+     */
+    public static boolean isBipartite(Graph g) {
+        int[] colors = new int[g.vertexCount()];
+        ArrayDeque<Integer> stack = new ArrayDeque<>();
+        stack.add(0);
+        int c = 1;
+        colors[0] = c;
+        while (!stack.isEmpty()) {
+            int v = stack.pop();
+            c = 3 - colors[v];
+            for (int w : g.adj(v)) {
+                if (colors[w] == 0) {
+                    colors[w] = c;
+                    stack.push(w);
+                } else if (colors[w] != c) {
+                    return false;
+                }
+            }
+        }
+        return true;
     }
 }
