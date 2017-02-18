@@ -4,7 +4,7 @@ import com.janosgyerik.utils.algorithm.graphs.api.Graph;
 
 import java.util.ArrayList;
 
-public class UndirectedGraph extends AbstractGraph {
+class UndirectedGraph extends AbstractGraph {
     @Override
     public void addEdge(int v, int w) {
         map.computeIfAbsent(v, k -> new ArrayList<>()).add(w);
