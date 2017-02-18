@@ -3,11 +3,13 @@ package com.janosgyerik.utils.algorithm.graphs.api;
 import java.util.Collection;
 
 /**
- * A simple directed graph with numeric vertex ids, starting from 0.
+ * A simple graph with numeric vertex ids, starting from 0.
+ *
+ * Implementations may be directed or undirected.
  */
 public interface Graph {
     /**
-     * Add a directed edge from one vertex to another.
+     * Add an edge from one vertex to another.
      */
     void addEdge(int v, int w);
 

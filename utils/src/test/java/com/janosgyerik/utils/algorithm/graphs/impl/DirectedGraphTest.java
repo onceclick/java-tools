@@ -5,7 +5,7 @@ import org.junit.*;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class GraphImplTest {
+public class DirectedGraphTest {
     @Test
     public void empty_graph_should_have_no_vertex_and_edge() {
         Graph g = newGraph();
@@ -48,7 +48,7 @@ public class GraphImplTest {
 
     @Test
     public void fromString_should_read_from_simple_pairs_csv() {
-        Graph g = GraphImpl.fromString("0-1,1-2,2-3");
+        Graph g = DirectedGraph.fromString("0-1,1-2,2-3");
         assertThat(g.edgeCount()).isEqualTo(3);
         assertThat(g.vertexCount()).isEqualTo(4);
         assertThat(g.adj(0)).containsExactly(1);
@@ -58,7 +58,7 @@ public class GraphImplTest {
 
     @Test
     public void fromString_should_allow_space_delimited_format() {
-        Graph g = GraphImpl.fromString("0 1 1 2 2 3");
+        Graph g = DirectedGraph.fromString("0 1 1 2 2 3");
         assertThat(g.edgeCount()).isEqualTo(3);
         assertThat(g.vertexCount()).isEqualTo(4);
         assertThat(g.adj(0)).containsExactly(1);
@@ -99,6 +99,6 @@ public class GraphImplTest {
     }
 
     private Graph newGraph() {
-        return new GraphImpl();
+        return new DirectedGraph();
     }
 }

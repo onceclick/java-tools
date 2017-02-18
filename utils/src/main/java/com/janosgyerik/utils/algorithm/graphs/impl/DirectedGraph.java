@@ -5,7 +5,7 @@ import com.janosgyerik.utils.algorithm.graphs.api.Graph;
 import java.util.*;
 import java.util.regex.Pattern;
 
-public class GraphImpl implements Graph {
+public class DirectedGraph implements Graph {
     private final Map<Integer, List<Integer>> map = new HashMap<>();
 
     @Override
@@ -46,7 +46,7 @@ public class GraphImpl implements Graph {
     }
 
     public static Graph fromString(String input) {
-        Graph g = new GraphImpl();
+        Graph g = new DirectedGraph();
         try (Scanner scanner = new Scanner(input)) {
             scanner.useDelimiter(Pattern.compile("[-,\\s]"));
             while (scanner.hasNext()) {
