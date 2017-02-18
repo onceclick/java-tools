@@ -6,17 +6,12 @@ import java.util.*;
 import java.util.regex.Pattern;
 
 public class GraphImpl implements Graph {
-    Map<Integer, List<Integer>> map = new HashMap<>();
-    private int edgeCount = 0;
+    private final Map<Integer, List<Integer>> map = new HashMap<>();
 
     @Override
     public void addEdge(int v, int w) {
-        List<Integer> adj = map.computeIfAbsent(v, k -> new ArrayList<>());
-        adj.add(w);
-        if (!map.containsKey(w)) {
-            map.put(w, new ArrayList<>());
-        }
-        edgeCount++;
+        map.computeIfAbsent(v, k -> new ArrayList<>()).add(w);
+        map.putIfAbsent(w, new ArrayList<>());
     }
 
     @Override
@@ -26,7 +21,7 @@ public class GraphImpl implements Graph {
 
     @Override
     public int edgeCount() {
-        return edgeCount;
+        return map.values().stream().mapToInt(List::size).sum();
     }
 
     @Override
