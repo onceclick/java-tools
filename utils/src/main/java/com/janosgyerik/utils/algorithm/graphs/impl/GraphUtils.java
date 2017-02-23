@@ -125,4 +125,14 @@ public class GraphUtils {
         // TODO
     }
 
+    // TODO javadoc
+    Paths paths(Graph g, int start) {
+        return new Paths(g, start);
+    }
+
+    // TODO javadoc
+    ConnectedComponents connectedComponents(Graph g) {
+        return new ConnectedComponents(g);
+    }
+
 }
