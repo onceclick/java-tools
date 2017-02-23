@@ -3,6 +3,7 @@ package com.janosgyerik.utils.algorithm.graphs.impl;
 import com.janosgyerik.utils.algorithm.graphs.api.Graph;
 
 import java.util.ArrayDeque;
+import java.util.Collection;
 import java.util.stream.IntStream;
 
 public class GraphUtils {
@@ -81,4 +82,47 @@ public class GraphUtils {
         }
         return false;
     }
+
+    /**
+     * Is there a (general) cycle that uses each edge exactly once?
+     */
+    public static boolean hasEulerianTour(Graph g) {
+        return IntStream.range(0, g.vertexCount()).allMatch(v -> GraphUtils.degree(g, v) % 2 == 0);
+    }
+
+    /**
+     * Find a (general) cycle that uses every edge exactly once.
+     */
+    public static Collection<Integer> findEulerianTour(Graph g) {
+        // TODO
+        return null;
+    }
+
+    /**
+     * Find a cycle that visits every vertex exactly once.
+     * Note: this is a classic NP-complete problem, intractable.
+     */
+    public static Collection<Integer> findHamiltonianCycle(Graph g) {
+        // TODO
+        return null;
+    }
+
+    /**
+     * Are two graphs identical except for vertex names?
+     * Note: this is a longstanding open problem.
+     */
+    public static boolean isomorphic(Graph g1, Graph g2) {
+        // TODO
+        return false;
+    }
+
+    /**
+     * Lay out a graph in the plane without crossing edges.
+     * Note: linear-time DFS-based planarity algorithm was discovered
+     * by Tarjan in 1970s (too complicated for most practitioners)
+     */
+    public static void printPlanar(Graph g) {
+        // TODO
+    }
+
 }
