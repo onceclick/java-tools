@@ -17,9 +17,7 @@ public class UnionFindImpl implements UnionFind {
     }
 
     private void add(int p) {
-        if (!ids.containsKey(p)) {
-            ids.put(p, p);
-        }
+        ids.putIfAbsent(p, p);
     }
 
     private int root(int p) {
