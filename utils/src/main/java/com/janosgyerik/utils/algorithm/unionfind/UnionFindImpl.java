@@ -25,8 +25,9 @@ public class UnionFindImpl implements UnionFind {
     private int root(int p) {
         int root = p;
         while (root != ids.get(root)) {
-            ids.put(root, ids.get(ids.get(root)));
-            root = ids.get(root);
+            int parent = ids.get(ids.get(root));
+            ids.put(root, parent);
+            root = parent;
         }
         return root;
     }

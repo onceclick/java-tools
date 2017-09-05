@@ -18,7 +18,7 @@ public class UnionFindImplTest {
         uf.union(3, 4);
         uf.union(3, 8);
         uf.union(4, 9);
-        
+
         assertThat(uf.connected(0, 6)).isTrue();
         assertThat(uf.connected(0, 1)).isFalse();
         assertThat(uf.connected(8, 9)).isTrue();
