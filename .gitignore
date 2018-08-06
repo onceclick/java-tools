@@ -15,6 +15,10 @@ hs_err_pid*
 # Maven
 target/
 
+# Gradle
+.gradle
+build
+
 # Eclipse
 .classpath
 .project

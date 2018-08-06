@@ -1,0 +1,4 @@
+rootProject.name = 'java-utils'
+include ':utils'
+
+project(':utils').projectDir = "$rootDir/utils" as File
