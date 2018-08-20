@@ -13,6 +13,13 @@ public interface Graph {
      */
     void addEdge(int v, int w);
 
+    /**
+     * Add a weighted edge from one vertex to another.
+     */
+    default void addEdge(int p, int q, int w) {
+        throw new UnsupportedOperationException();
+    }
+
     int vertexCount();
 
     int edgeCount();
@@ -26,4 +33,11 @@ public interface Graph {
      * Get a string representation that can be used to reconstruct an identical Graph.
      */
     String asString();
+
+    /**
+     * Get the weight of an edge between two vertices.
+     */
+    default int weight(int from, int to) {
+        throw new UnsupportedOperationException();
+    }
 }
