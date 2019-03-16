@@ -65,4 +65,12 @@ public class CounterTest {
     assertThat(counter.get("baz")).isEqualTo(0);
   }
 
+  @Test
+  public void create_counter_from_string() {
+    Counter<Character> counter = Counters.create("foo");
+    assertThat(counter.get('o')).isEqualTo(2);
+    assertThat(counter.get('f')).isEqualTo(1);
+    assertThat(counter.get('z')).isEqualTo(0);
+  }
+
 }

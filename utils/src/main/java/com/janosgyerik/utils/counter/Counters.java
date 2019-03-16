@@ -28,6 +28,10 @@ public final class Counters {
     return create(Arrays.asList(array));
   }
 
+  public static Counter<Character> create(String text) {
+    return create(text.chars().mapToObj(c -> (char) c).toArray(Character[]::new));
+  }
+
   public static <T> SortedCounter<T> createSorted() {
     return new SortedCounterImpl<>();
   }
