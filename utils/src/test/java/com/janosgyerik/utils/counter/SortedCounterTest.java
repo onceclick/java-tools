@@ -9,35 +9,35 @@ import static org.junit.Assert.assertEquals;
 public class SortedCounterTest {
   @Test
   public void test_top() {
-    SortedCounter<Integer> counter = Counters.sortedCounter();
+    SortedCounter<Integer> counter = Counters.createSorted();
     counter.addAll(Arrays.asList(1, 4, 9, 3, 4, 5, 4, 9));
     assertEquals(Integer.valueOf(4), counter.highest());
   }
 
   @Test
   public void test_topCount() {
-    SortedCounter<Integer> counter = Counters.sortedCounter();
+    SortedCounter<Integer> counter = Counters.createSorted();
     counter.addAll(Arrays.asList(1, 4, 9, 3, 4, 5, 4, 9));
     assertEquals(3, counter.highestCount());
   }
 
   @Test
   public void test_bottom() {
-    SortedCounter<Integer> counter = Counters.sortedCounter();
+    SortedCounter<Integer> counter = Counters.createSorted();
     counter.addAll(Arrays.asList(1, 4, 9, 3, 4, 5, 4, 9));
     assertEquals(Integer.valueOf(1), counter.lowest());
   }
 
   @Test
   public void test_bottomCount() {
-    SortedCounter<Integer> counter = Counters.sortedCounter();
+    SortedCounter<Integer> counter = Counters.createSorted();
     counter.addAll(Arrays.asList(1, 4, 9, 3, 4, 5, 4, 9));
     assertEquals(1, counter.lowestCount());
   }
 
   @Test
   public void test_getMostFrequentLetter() {
-    SortedCounter<Character> counter = Counters.sortedCounter();
+    SortedCounter<Character> counter = Counters.createSorted();
     String text = "Lorem ipsum dolor sit amet, consectetur adipisicing elit, " +
       "sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. " +
       "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris " +
@@ -54,7 +54,7 @@ public class SortedCounterTest {
 
   @Test
   public void test_get2ndFrequentLetter() {
-    SortedCounter<Character> counter = Counters.sortedCounter();
+    SortedCounter<Character> counter = Counters.createSorted();
     String text = "Lorem ipsum dolor sit amet, consectetur adipisicing elit, " +
       "sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. " +
       "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris " +
@@ -72,7 +72,7 @@ public class SortedCounterTest {
 
   @Test
   public void test_map_hi_hi_hello() {
-    SortedCounter<String> counter = Counters.sortedCounter();
+    SortedCounter<String> counter = Counters.createSorted();
     counter.add("hi");
     counter.add("hi");
     counter.add("hello");
@@ -81,7 +81,7 @@ public class SortedCounterTest {
 
   @Test
   public void test_map_hello_hi_hi() {
-    SortedCounter<String> counter = Counters.sortedCounter();
+    SortedCounter<String> counter = Counters.createSorted();
     counter.add("hello");
     counter.add("hi");
     counter.add("hi");
@@ -90,7 +90,7 @@ public class SortedCounterTest {
 
   @Test
   public void test_map_hello_hi_hi_hello_hello() {
-    SortedCounter<String> counter = Counters.sortedCounter();
+    SortedCounter<String> counter = Counters.createSorted();
     counter.add("hello");
     counter.add("hi");
     counter.add("hi");

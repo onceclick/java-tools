@@ -15,15 +15,11 @@ public final class Counters {
     throw new AssertionError("utility class, forbidden constructor");
   }
 
-  public static <T> Counter<T> counter() {
+  public static <T> Counter<T> create() {
     return new CounterImpl<>();
   }
 
-  public static <T> Counter<T> counter(Map<T, Integer> map) {
-    return new CounterImpl<>(map);
-  }
-
-  public static <T> SortedCounter<T> sortedCounter() {
+  public static <T> SortedCounter<T> createSorted() {
     return new SortedCounterImpl<>();
   }
 
