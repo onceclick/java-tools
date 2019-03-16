@@ -11,55 +11,55 @@ import java.util.PriorityQueue;
 
 public class DijkstraImpl implements Dijkstra {
 
-    private final Map<Integer, Integer> dist = new HashMap<>();
-    private final Map<Integer, Integer> prev = new HashMap<>();
+  private final Map<Integer, Integer> dist = new HashMap<>();
+  private final Map<Integer, Integer> prev = new HashMap<>();
 
-    @Override
-    public void compute(Graph g, int source) {
-        init();
+  @Override
+  public void compute(Graph g, int source) {
+    init();
 
-        for (int i = 0; i < g.vertexCount(); i++) {
-            dist.put(i, INFINITY);
+    for (int i = 0; i < g.vertexCount(); i++) {
+      dist.put(i, INFINITY);
+    }
+    dist.put(source, 0);
+
+    PriorityQueue<Integer> queue = new PriorityQueue<>(Comparator.comparingInt(dist::get));
+    queue.add(source);
+
+    while (!queue.isEmpty()) {
+      int current = queue.poll();
+
+      for (Integer neigh : g.adj(current)) {
+        int d = dist.get(current) + g.weight(current, neigh);
+        if (d < dist.get(neigh)) {
+          dist.put(neigh, d);
+          prev.put(neigh, current);
+          queue.remove(neigh);
+          queue.add(neigh);
         }
-        dist.put(source, 0);
-
-        PriorityQueue<Integer> queue = new PriorityQueue<>(Comparator.comparingInt(dist::get));
-        queue.add(source);
-
-        while (!queue.isEmpty()) {
-            int current = queue.poll();
-
-            for (Integer neigh : g.adj(current)) {
-                int d = dist.get(current) + g.weight(current, neigh);
-                if (d < dist.get(neigh)) {
-                    dist.put(neigh, d);
-                    prev.put(neigh, current);
-                    queue.remove(neigh);
-                    queue.add(neigh);
-                }
-            }
-        }
+      }
     }
+  }
 
-    private void init() {
-        dist.clear();
-        prev.clear();
-    }
+  private void init() {
+    dist.clear();
+    prev.clear();
+  }
 
-    @Override
-    public int minDistance(int target) {
-        return dist.getOrDefault(target, INFINITY);
-    }
+  @Override
+  public int minDistance(int target) {
+    return dist.getOrDefault(target, INFINITY);
+  }
 
-    @Override
-    public List<Integer> shortestPath(int target) {
-        List<Integer> path = new LinkedList<>();
-        int q = target;
-        while (prev.containsKey(q)) {
-            path.add(0, q);
-            q = prev.get(q);
-        }
-        path.add(0, q);
-        return path;
+  @Override
+  public List<Integer> shortestPath(int target) {
+    List<Integer> path = new LinkedList<>();
+    int q = target;
+    while (prev.containsKey(q)) {
+      path.add(0, q);
+      q = prev.get(q);
     }
+    path.add(0, q);
+    return path;
+  }
 }

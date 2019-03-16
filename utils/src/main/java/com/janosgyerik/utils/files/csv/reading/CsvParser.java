@@ -9,87 +9,87 @@ import java.util.regex.Pattern;
 
 public class CsvParser {
 
-    private static final String DEFAULT_SEPARATOR = ",";
+  private static final String DEFAULT_SEPARATOR = ",";
 
-    private abstract static class AbstractCsvParser {
+  private CsvParser() {
+    // utility class, forbidden constructor
+  }
 
-        private final Pattern pattern;
+  public static <T> List<T> objectsFromFile(String path, RowMapper<T> mapper) throws IOException {
+    return objectsFromFile(path, DEFAULT_SEPARATOR, mapper);
+  }
 
-        private AbstractCsvParser(String separator) {
-            this.pattern = Pattern.compile("\\s*" + separator + "\\s*");
+  public static <T> List<T> objectsFromFile(String path, String separator, RowMapper<T> mapper) throws IOException {
+    return objectsFromFile(new File(path), separator, mapper);
+  }
+
+  public static <T> List<T> objectsFromFile(File file, RowMapper<T> mapper) throws IOException {
+    return objectsFromFile(file, DEFAULT_SEPARATOR, mapper);
+  }
+
+  public static <T> List<T> objectsFromFile(File file, String separator, RowMapper<T> mapper) throws IOException {
+    return new ScannerCsvParser(new Scanner(file), separator).parseLines(mapper);
+  }
+
+  public static <T> List<T> objectsFromScanner(Scanner scanner, RowMapper<T> mapper) throws IOException {
+    return objectsFromScanner(scanner, DEFAULT_SEPARATOR, mapper);
+  }
+
+  public static <T> List<T> objectsFromScanner(Scanner scanner, String separator, RowMapper<T> mapper) throws IOException {
+    return new ScannerCsvParser(scanner, separator).parseLines(mapper);
+  }
+
+  public static <T> List<T> objectsFromText(String text, RowMapper<T> mapper) throws IOException {
+    return objectsFromText(text, DEFAULT_SEPARATOR, mapper);
+  }
+
+  public static <T> List<T> objectsFromText(String text, String separator, RowMapper<T> mapper) throws IOException {
+    return objectsFromScanner(new Scanner(text), separator, mapper);
+  }
+
+  private abstract static class AbstractCsvParser {
+
+    private final Pattern pattern;
+
+    private AbstractCsvParser(String separator) {
+      this.pattern = Pattern.compile("\\s*" + separator + "\\s*");
+    }
+
+    abstract String nextLine() throws IOException;
+
+    abstract boolean hasNextLine() throws IOException;
+
+    public <T> List<T> parseLines(RowMapper<T> mapper) throws IOException {
+      List<T> lines = new ArrayList<>();
+      while (hasNextLine()) {
+        String line = nextLine();
+        String[] cols = pattern.split(line.trim());
+        if (mapper.isValidRow(cols)) {
+          lines.add(mapper.mapRow(cols));
         }
+      }
+      return lines;
+    }
+  }
 
-        abstract String nextLine() throws IOException;
+  private static class ScannerCsvParser extends AbstractCsvParser {
 
-        abstract boolean hasNextLine() throws IOException;
+    private final Scanner scanner;
 
-        public <T> List<T> parseLines(RowMapper<T> mapper) throws IOException {
-            List<T> lines = new ArrayList<>();
-            while (hasNextLine()) {
-                String line = nextLine();
-                String[] cols = pattern.split(line.trim());
-                if (mapper.isValidRow(cols)) {
-                    lines.add(mapper.mapRow(cols));
-                }
-            }
-            return lines;
-        }
+    private ScannerCsvParser(Scanner scanner, String separator) {
+      super(separator);
+      this.scanner = scanner;
     }
 
-    private static class ScannerCsvParser extends AbstractCsvParser {
-
-        private final Scanner scanner;
-
-        private ScannerCsvParser(Scanner scanner, String separator) {
-            super(separator);
-            this.scanner = scanner;
-        }
-
-        @Override
-        boolean hasNextLine() throws IOException {
-            return scanner.hasNextLine();
-        }
-
-        @Override
-        String nextLine() {
-            return scanner.nextLine();
-        }
+    @Override
+    boolean hasNextLine() throws IOException {
+      return scanner.hasNextLine();
     }
 
-    private CsvParser() {
-        // utility class, forbidden constructor
+    @Override
+    String nextLine() {
+      return scanner.nextLine();
     }
-
-    public static <T> List<T> objectsFromFile(String path, RowMapper<T> mapper) throws IOException {
-        return objectsFromFile(path, DEFAULT_SEPARATOR, mapper);
-    }
-
-    public static <T> List<T> objectsFromFile(String path, String separator, RowMapper<T> mapper) throws IOException {
-        return objectsFromFile(new File(path), separator, mapper);
-    }
-
-    public static <T> List<T> objectsFromFile(File file, RowMapper<T> mapper) throws IOException {
-        return objectsFromFile(file, DEFAULT_SEPARATOR, mapper);
-    }
-
-    public static <T> List<T> objectsFromFile(File file, String separator, RowMapper<T> mapper) throws IOException {
-        return new ScannerCsvParser(new Scanner(file), separator).parseLines(mapper);
-    }
-
-    public static <T> List<T> objectsFromScanner(Scanner scanner, RowMapper<T> mapper) throws IOException {
-        return objectsFromScanner(scanner, DEFAULT_SEPARATOR, mapper);
-    }
-
-    public static <T> List<T> objectsFromScanner(Scanner scanner, String separator, RowMapper<T> mapper) throws IOException {
-        return new ScannerCsvParser(scanner, separator).parseLines(mapper);
-    }
-
-    public static <T> List<T> objectsFromText(String text, RowMapper<T> mapper) throws IOException {
-        return objectsFromText(text, DEFAULT_SEPARATOR, mapper);
-    }
-
-    public static <T> List<T> objectsFromText(String text, String separator, RowMapper<T> mapper) throws IOException {
-        return objectsFromScanner(new Scanner(text), separator, mapper);
-    }
+  }
 
 }

@@ -10,7 +10,7 @@ import java.util.Optional;
  */
 public interface ObjectStore<K, V> {
 
-    void write(K key, V value);
+  void write(K key, V value);
 
-    Optional<V> read(K key);
+  Optional<V> read(K key);
 }

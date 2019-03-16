@@ -1,51 +1,50 @@
 package com.janosgyerik.utils.files;
 
-import org.junit.Before;
-import org.junit.Test;
-
 import java.io.File;
 import java.io.IOException;
+import org.junit.Before;
+import org.junit.Test;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 public class SimpleArchiverTest {
 
-    SimpleArchiver archiver;
+  SimpleArchiver archiver;
 
-    @Before
-    public void setUp() {
-        File targetDir = new File(System.getProperty("java.io.tmpdir"));
-        archiver = new SimpleArchiver(targetDir);
-    }
+  @Before
+  public void setUp() {
+    File targetDir = new File(System.getProperty("java.io.tmpdir"));
+    archiver = new SimpleArchiver(targetDir);
+  }
 
-    private File createSampleFile() throws IOException {
-        return File.createTempFile("sample", null);
-    }
+  private File createSampleFile() throws IOException {
+    return File.createTempFile("sample", null);
+  }
 
-    @Test
-    public void testCopyWithDate() throws IOException {
-        File source = createSampleFile();
-        assertTrue(source.isFile());
+  @Test
+  public void testCopyWithDate() throws IOException {
+    File source = createSampleFile();
+    assertTrue(source.isFile());
 
-        File target = archiver.getTargetWithDate(source);
-        assertFalse(target.isFile());
+    File target = archiver.getTargetWithDate(source);
+    assertFalse(target.isFile());
 
-        archiver.copyWithDate(source);
-        assertTrue(target.isFile());
-        assertTrue(source.isFile());
-    }
+    archiver.copyWithDate(source);
+    assertTrue(target.isFile());
+    assertTrue(source.isFile());
+  }
 
-    @Test
-    public void testMoveWithDate() throws IOException {
-        File source = createSampleFile();
-        assertTrue(source.isFile());
+  @Test
+  public void testMoveWithDate() throws IOException {
+    File source = createSampleFile();
+    assertTrue(source.isFile());
 
-        File target = archiver.getTargetWithDate(source);
-        assertFalse(target.isFile());
+    File target = archiver.getTargetWithDate(source);
+    assertFalse(target.isFile());
 
-        archiver.moveWithDate(source);
-        assertTrue(target.isFile());
-        assertFalse(source.isFile());
-    }
+    archiver.moveWithDate(source);
+    assertTrue(target.isFile());
+    assertFalse(source.isFile());
+  }
 }

@@ -6,28 +6,28 @@ import java.util.List;
 import java.util.Queue;
 
 public class ChainIterator<E> implements Iterator<E> {
-    private final Queue<Iterator<E>> iterators = new LinkedList<>();
+  private final Queue<Iterator<E>> iterators = new LinkedList<>();
 
-    public ChainIterator(List<Iterator<E>> iterators) {
-        for (Iterator<E> iterator : iterators) {
-            if (iterator.hasNext()) {
-                this.iterators.add(iterator);
-            }
-        }
+  public ChainIterator(List<Iterator<E>> iterators) {
+    for (Iterator<E> iterator : iterators) {
+      if (iterator.hasNext()) {
+        this.iterators.add(iterator);
+      }
     }
+  }
 
-    @Override
-    public boolean hasNext() {
-        return !iterators.isEmpty();
-    }
+  @Override
+  public boolean hasNext() {
+    return !iterators.isEmpty();
+  }
 
-    @Override
-    public E next() {
-        Iterator<E> iterator = iterators.peek();
-        E result = iterator.next();
-        if (!iterator.hasNext()) {
-            iterators.poll();
-        }
-        return result;
+  @Override
+  public E next() {
+    Iterator<E> iterator = iterators.peek();
+    E result = iterator.next();
+    if (!iterator.hasNext()) {
+      iterators.poll();
     }
+    return result;
+  }
 }
