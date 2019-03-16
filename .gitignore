@@ -30,6 +30,7 @@ build
 #*.iws
 .idea
 *.iml
+out
 
 # misc
 tmp
