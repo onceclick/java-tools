@@ -61,13 +61,13 @@ public final class Counters {
     }
 
     @Override
-    public Map<T, Integer> counts() {
-      return counts;
+    public int get(T item) {
+      return counts.getOrDefault(item, 0);
     }
 
     @Override
-    public int get(T item) {
-      return counts.getOrDefault(item, 0);
+    public Map<T, Integer> counts() {
+      return counts;
     }
   }
 
@@ -159,13 +159,13 @@ public final class Counters {
     }
 
     @Override
-    public Map<T, Integer> counts() {
-      return counter.counts();
+    public int get(T item) {
+      return counter.get(item);
     }
 
     @Override
-    public int get(T item) {
-      return counter.get(item);
+    public Map<T, Integer> counts() {
+      return counter.counts();
     }
   }
 }
