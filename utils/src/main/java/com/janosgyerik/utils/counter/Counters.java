@@ -50,7 +50,7 @@ public final class Counters {
 
     @Override
     public Counter<T> add(T item) {
-      counts.put(item, get(item) + 1);
+      counts.merge(item, 1, Integer::sum);
       return this;
     }
 
