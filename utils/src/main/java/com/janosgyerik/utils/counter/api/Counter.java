@@ -1,6 +1,5 @@
 package com.janosgyerik.utils.counter.api;
 
-import java.util.Collection;
 import java.util.Map;
 
 /**
@@ -19,11 +18,11 @@ public interface Counter<T> {
   Counter<T> add(T item);
 
   /**
-   * Add a collection of items, incrementing their count.
+   * Add many items, incrementing their count.
    *
    * @param items the items to count
    */
-  Counter<T> addAll(Collection<T> items);
+  Counter<T> addAll(Iterable<T> items);
 
   /**
    * Return the count of specified item.

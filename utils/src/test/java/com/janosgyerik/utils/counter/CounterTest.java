@@ -48,4 +48,21 @@ public class CounterTest {
     counter.counts().put(item, count);
     assertThat(counter.get(item)).isEqualTo(count);
   }
+
+  @Test
+  public void create_counter_from_iterable() {
+    Counter<String> counter = Counters.create(Arrays.asList("foo", "bar", "foo"));
+    assertThat(counter.get("foo")).isEqualTo(2);
+    assertThat(counter.get("bar")).isEqualTo(1);
+    assertThat(counter.get("baz")).isEqualTo(0);
+  }
+
+  @Test
+  public void create_counter_from_array_of_objects() {
+    Counter<String> counter = Counters.create(new String[] {"foo", "bar", "foo"});
+    assertThat(counter.get("foo")).isEqualTo(2);
+    assertThat(counter.get("bar")).isEqualTo(1);
+    assertThat(counter.get("baz")).isEqualTo(0);
+  }
+
 }

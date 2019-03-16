@@ -3,7 +3,7 @@ package com.janosgyerik.utils.counter;
 import com.janosgyerik.utils.counter.api.Counter;
 import com.janosgyerik.utils.counter.api.SortedCounter;
 import java.util.ArrayList;
-import java.util.Collection;
+import java.util.Arrays;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
@@ -17,6 +17,15 @@ public final class Counters {
 
   public static <T> Counter<T> create() {
     return new CounterImpl<>();
+  }
+
+  public static <T> Counter<T> create(Iterable<T> iterable) {
+    Counter<T> counter = create();
+    return counter.addAll(iterable);
+  }
+
+  public static <T> Counter<T> create(T[] array) {
+    return create(Arrays.asList(array));
   }
 
   public static <T> SortedCounter<T> createSorted() {
@@ -42,7 +51,7 @@ public final class Counters {
     }
 
     @Override
-    public Counter<T> addAll(Collection<T> items) {
+    public Counter<T> addAll(Iterable<T> items) {
       items.forEach(this::add);
       return this;
     }
@@ -139,7 +148,7 @@ public final class Counters {
     }
 
     @Override
-    public Counter<T> addAll(Collection<T> items) {
+    public Counter<T> addAll(Iterable<T> items) {
       counter.addAll(items);
       modifiedSinceLastSort = true;
       return this;
