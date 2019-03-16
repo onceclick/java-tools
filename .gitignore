@@ -33,3 +33,6 @@ build
 
 # misc
 tmp
+
+# SonarCloud
+gradle.properties
