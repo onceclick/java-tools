@@ -19,6 +19,10 @@ public class TestUtils {
   }
 
   public static void createTempFiles(File basedir, List<String> filenames) throws IOException {
+    createTempFiles(basedir, filenames.toArray(new String[0]));
+  }
+
+  public static void createTempFiles(File basedir, String... filenames) throws IOException {
     for (String filename : filenames) {
       File file = new File(basedir, filename);
       if (!file.createNewFile()) {

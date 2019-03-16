@@ -4,9 +4,10 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Stream;
 import org.junit.Test;
 
-import static org.junit.Assert.assertArrayEquals;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
@@ -56,13 +57,13 @@ public class TestUtilsTest {
   @Test
   public void testCreateTestFiles() throws IOException {
     File basedir = FileUtils.createTempDir();
-    List<String> filenames = Arrays.asList("file1.txt", "file2.csv", "file3.xml");
+    String[] filenames = {"file1.txt", "file2.csv", "file3.xml"};
     TestUtils.createTempFiles(basedir, filenames);
-    assertEquals(filenames, Arrays.asList(basedir.list()));
 
-    for (String filename : basedir.list()) {
-      assertTrue(new File(basedir, filename).isFile());
-    }
+    String[] basedirList = basedir.list();
+    assertThat(filenames).containsExactlyInAnyOrder(basedirList);
+
+    Stream.of(basedirList).forEach(filename -> assertThat(new File(basedir, filename).isDirectory()));
   }
 
   @Test
@@ -70,10 +71,10 @@ public class TestUtilsTest {
     File basedir = FileUtils.createTempDir();
     String[] dirnames = {"dir1", "dir2", "dir3"};
     TestUtils.createTestDirs(basedir, dirnames);
-    assertArrayEquals(dirnames, basedir.list());
 
-    for (String filename : basedir.list()) {
-      assertTrue(new File(basedir, filename).isDirectory());
-    }
+    String[] basedirList = basedir.list();
+    assertThat(dirnames).containsExactlyInAnyOrder(basedirList);
+
+    Stream.of(basedirList).forEach(filename -> assertThat(new File(basedir, filename).isDirectory()));
   }
 }
